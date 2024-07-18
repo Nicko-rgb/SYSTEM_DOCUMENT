@@ -1,0 +1,204 @@
+.registro {
+    height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.registro>div {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.registro h1 {
+    text-align: center;
+}
+
+.registro .titulo p {
+    text-align: center;
+}
+
+.registro form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 0 3px rgb(253, 97, 40);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(205, 232, 227);
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+.registro form h3 {
+    text-align: center;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+.registro form .scann {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.scann .div {
+    position: absolute;
+    box-shadow: green 0 0 2px;
+    border-radius: 5px;
+    padding: 6px;
+    display: grid;
+    place-items: center;
+    right: 0;
+    text-decoration: none;
+    transition: 0.5s ease;
+    margin-top: -20px;
+}
+
+.scann label {
+    font-size: 14px;
+    color: orangered;
+    pointer-events: none;
+}
+
+.scann .linkIco {
+    color: orangered;
+    font-size: 25px;
+}
+
+.scann .div:hover {
+    box-shadow: green 0 0 5px;
+    font-weight: bold;
+}
+
+form label {
+    margin-left: 3px;
+    color: brown;
+    font-family: calibri;
+}
+
+form input,
+select {
+    outline: none;
+    border: none;
+    border-radius: 0px;
+    padding: 7px;
+    font-size: 17px;
+}
+
+.registro form .vistaPrevia {
+    padding: 7px;
+    box-shadow: 0 0 2px brown;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    padding-bottom: 30px;
+}
+
+.registro form .vistaPrevia h3 {
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: arial narrow;
+}
+
+.registro form .vistaPrevia p {
+    padding: 7px;
+    background-color: white;
+    border-radius: 7px;
+}
+
+.registro form .vistaPrevia span {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 4px 0;
+    padding-right: 10px;
+}
+
+.registro form .vistaPrevia span:hover {
+    color: rgb(22, 216, 197);
+    text-decoration: underline;
+}
+
+form .file {
+    box-shadow: none;
+}
+
+form button {
+    border: none;
+    border-radius: 6px;
+    height: 35px;
+    width: 150px;
+    font-weight: bold;
+    margin: 0 auto;
+    border: none;
+    background: rgb(253, 97, 40);
+    color: white;
+    box-shadow: 0 0 4px green;
+    cursor: pointer;
+}
+
+/***************************************************************************/
+/*ESTILO PARA LOADER Y MODAL
+/***************************************************************************/
+.success-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.success-modal h3{
+    color: green;
+}
+
+.success-modal-content {
+    background-color: white;
+    box-shadow: 0 0 5px green;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+.success-modal-content .icon{
+    font-size: 80px;
+    padding: 10px;
+    color: green;
+}
+
+
+
+.error-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.error-modal h3{
+    color: red;
+}
+
+.error-modal-content {
+    background-color: white;
+    box-shadow: 0 0 5px red;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
