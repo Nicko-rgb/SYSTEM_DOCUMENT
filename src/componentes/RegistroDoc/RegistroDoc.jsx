@@ -56,8 +56,8 @@ const RegistroDoc = () => {
                 setNombre('');
                 setApellido('');
                 setDni('');
-                setReceptor('Tesoreria');
-                setMotivoArchivo('Producción Agropecuaria');
+                setReceptor('');
+                setMotivoArchivo('');
                 setArchivo(null);
                 setTxtArchivo('');
             }, 2000);
@@ -96,7 +96,7 @@ const RegistroDoc = () => {
         <div className="registro">
             <div>
                 <div className="titulo">
-                    <h1>BIENVENIDO AL DOCUMENT SYSTEM</h1>
+                    <h1>REGISTRO DE DOCUMENTOS</h1>
                     <p>Este es un sistema el que pasaremos docuemntos fisiscos a digital</p>
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -116,7 +116,7 @@ const RegistroDoc = () => {
                     <div>
                         <label>Enviar a:</label>
                         <select value={receptor} onChange={(e) => setReceptor(e.target.value)}>
-                            <option value='Tesorería'>Tesorería</option>
+                            <option value='Tesoreria'>Tesorería</option>
                             <option value='Dirección'>Dirección</option>
                             <option value='Desarrollo de Sistemas de Información'>Desarrollo de Sistemas de Información</option>
                             <option value="Contabilidad">Contalidad</option>

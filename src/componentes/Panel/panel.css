@@ -45,7 +45,7 @@
 
 .panel .navegador {
     text-align: center;
-    height: 70px;
+    height: 100px;
     padding: 5px;
     background-color: rgb(17, 90, 132);
     border-radius: 10px;
@@ -68,7 +68,7 @@
     display: flex;
     position: relative;
     height: auto;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 120px);
     /* padding: 5px; */
     gap: 5px;
 }
