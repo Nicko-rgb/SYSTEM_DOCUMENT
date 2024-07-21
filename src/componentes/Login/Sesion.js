@@ -4,6 +4,7 @@ const EstadoSesion = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userCarrera, setUserCarrera] = useState('');
 
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {

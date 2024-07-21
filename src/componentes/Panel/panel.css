@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 5px;
+    /* padding: 5px; */
     gap: 5px;
     overflow-y: auto;
     background: rgb(240, 255, 251);
@@ -43,34 +43,13 @@
     animation-play-state: paused;
 }
 
-.panel .navegador {
-    text-align: center;
-    height: 100px;
-    padding: 5px;
-    background-color: rgb(17, 90, 132);
-    border-radius: 10px;
-    color: white;
-}
-
-.navegador h2 {
-    font-size: 24px;
-    margin: 0;
-    font-family: calibri;
-}
-
-.navegador p {
-    font-size: 20px;
-    font-family: calibri;
-}
-
 
 .panel main {
     display: flex;
     position: relative;
     height: auto;
-    height: calc(100vh - 120px);
-    /* padding: 5px; */
-    gap: 5px;
+    height: calc(100vh - 100px);
+    padding: 5px;
 }
 
 main .mensajes .cabeza {

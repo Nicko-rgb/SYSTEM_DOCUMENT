@@ -1,0 +1,37 @@
+.navegador {
+    position: sticky;
+    top: 0;
+    text-align: center;
+    height: 90px;
+    background-color: rgb(17, 90, 132);
+    color: white;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 25vw;
+    padding: 10px;
+}
+.navegador img{
+    width: 70px;
+}
+.navegador h2 {
+    font-size: 24px;
+    margin: 0;
+    font-family: calibri;
+}
+
+.navegador p {
+    font-size: 20px;
+    font-family: calibri;
+}
+.navegador .boton{
+    cursor: pointer;
+}
+.navegador .icono{
+    box-shadow: 0 0 5px white;
+    font-size: 35px;
+    padding: 7px;
+    border-radius: 50%;
+    color: white;
+}

@@ -1,33 +1,92 @@
-.login{
-    height: 100vh;
+.login {
     display: flex;
-    align-items: center;
     justify-content: center;
-}
-.login > div{
-    box-shadow: 0 0 2px brown;
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: -50px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.login h1{
-    font-size: 2rem;
-    margin: 0;
-    display: grid;
-    place-items: center;
-    margin-top: -10px;
-}
-.login div form{
-    display: flex;
-    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+    background-image: url('https://www.prasaga.com/wp-content/uploads/2022/11/PoW-Images_0002_PoW3-2400x1260.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
-.login input{
-    margin-bottom: 10px;
-    font-size: initial;
-    box-shadow: 0 0 2px brown;
+.login-container {
+    /* background-color: white; */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 3px rgb(51, 143, 123);
+    transition: 0.3s ease;
+}
+.login-container:hover{
+    box-shadow: 0 0 15px rgb(51, 143, 123)
+}
+
+h1 {
+    color: white;
+    margin-bottom: 20px;
+}
+.login-container form div{
+    position: relative;
+}
+.icon{
+    position: absolute;
+    right: 7px;
+    top: 34px;
+    font-size: 22px;
+    pointer-events: none;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 17px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.input-field:focus {
+    border-color: rgb(134, 24, 77);
+    outline: none;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(55, 174, 148);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: rgb(24, 109, 90);
+}
+
+.reset, .document-status {
+    margin-top: 15px;
+}
+
+.reset a, .document-status a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.reset a:hover, .document-status a:hover {
+    text-decoration: underline;
 }

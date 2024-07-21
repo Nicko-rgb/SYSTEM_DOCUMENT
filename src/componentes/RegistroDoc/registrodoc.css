@@ -1,23 +1,14 @@
 .registro {
     height: 100vh;
-    padding: 20px;
     overflow-y: auto;
-}
-
-.registro>div {
     display: flex;
     flex-direction: column;
-    gap: 30px;
 }
-
-.registro h1 {
-    text-align: center;
+.registro .subRegis {
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
 }
-
-.registro .titulo p {
-    text-align: center;
-}
-
 .registro form {
     display: flex;
     flex-direction: column;
@@ -148,7 +139,7 @@ form button {
 /***************************************************************************/
 .success-modal {
     position: fixed;
-    z-index: 1;
+    z-index: 999;
     left: 0;
     top: 0;
     width: 100%;
@@ -164,15 +155,18 @@ form button {
 }
 
 .success-modal-content {
+    position: relative;
     background-color: white;
     box-shadow: 0 0 5px green;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.success-modal-content .icon{
-    font-size: 80px;
-    padding: 10px;
+.success-modal-content .iconn{
+    font-size: 50px;
     color: green;
 }
 
@@ -201,4 +195,8 @@ form button {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+}
+.error-modal .iconn{
+    font-size: 50px;
+    color: red;
 }

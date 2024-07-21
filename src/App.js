@@ -5,6 +5,7 @@ import RegistroDoc from './componentes/RegistroDoc/RegistroDoc';
 import Scaner from './componentes/Scaner/Scaner';
 import Extrae from './componentes/RegistroDoc/Extrae';
 import Panel from './componentes/Panel/Panel';
+import StatuDoc from './componentes/StatuDoc/StatuDoc';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Route path="/scan/docuement" element={<Scaner />} />
                 <Route path="/extrae" element={<Extrae />} />
                 <Route path="/panel" element={<Panel />} />
+                <Route path="/document-status" element={<StatuDoc />} />
             </Routes>
         </BrowserRouter>
     );

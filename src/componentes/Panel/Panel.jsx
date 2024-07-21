@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './panel.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import EstadoSesion from '../Login/Sesion';
+import Navegador from '../Navegador/Navegador';
 
 export const Panel = () => {
     const { userCarrera } = EstadoSesion();
@@ -40,13 +41,14 @@ export const Panel = () => {
     const handleSearchDni = (event) => {
         setSearchDni(event.target.value);
     };
+    const navegar = useNavigate()
+    if(!userCarrera){
+        navegar('/')
+    }
 
     return (
         <div className="panel">
-            <nav className="navegador">
-                <h2>Bienvenido al Sistema de Envios de Documentos</h2>
-                <p>Panel de {userCarrera} </p>
-            </nav>
+            <Navegador />
             <main className="main">
                 <div className="recibidos mensajes">
                     <div className="cabeza">
@@ -79,7 +81,7 @@ export const Panel = () => {
                                 {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
                                     <img src={`/${selectedDocument.archivo.path}`} alt="Archivo adjunto" />
                                 ) : (
-                                    <a href={`http://192.168.43.190:5000/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
+                                    <a href={`http://localhost:5000/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
                                         Ver archivo adjunto
                                     </a>
                                 )}

@@ -1,12 +1,14 @@
 import './registrodoc.css';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MdAddAPhoto } from 'react-icons/md';
 import { FaRegCircleCheck } from "react-icons/fa6";
+import { BiError } from "react-icons/bi";
 import Tesseract from 'tesseract.js';
 import LoadingModal from '../Modal/Modal';
 import EstadoSesion from '../Login/Sesion';
+import Navegador from '../Navegador/Navegador';
 
 const RegistroDoc = () => {
     const [loading, setLoading] = useState(false);
@@ -17,12 +19,17 @@ const RegistroDoc = () => {
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [dni, setDni] = useState('');
-    const [receptor, setReceptor] = useState('Tesoreria');
-    const [motivoArchivo, setMotivoArchivo] = useState('Pago de Matricula');
+    const [receptor, setReceptor] = useState('');
+    const [motivoArchivo, setMotivoArchivo] = useState('');
     const [archivo, setArchivo] = useState(null);
     const [txtArchivo, setTxtArchivo] = useState('');
 
     const emisor = userCarrera;
+    
+    const noSesion = useNavigate()
+    if(!userCarrera){
+        noSesion('/')
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -94,11 +101,8 @@ const RegistroDoc = () => {
 
     return (
         <div className="registro">
-            <div>
-                <div className="titulo">
-                    <h1>REGISTRO DE DOCUMENTOS</h1>
-                    <p>Este es un sistema el que pasaremos docuemntos fisiscos a digital</p>
-                </div>
+            <Navegador />
+            <div className='subRegis'>
                 <form onSubmit={handleSubmit}>
                     <h3>FORMULARIO DE REGISTRO DE DOCUMENTO</h3>
                     <div>
@@ -133,11 +137,7 @@ const RegistroDoc = () => {
                     </div>
                     <div>
                         <label>Motivo de Documento</label>
-                        <select value={motivoArchivo} onChange={(e) => setMotivoArchivo(e.target.value)}>
-                            <option value="Pago de Matricula">Pago de Matricula</option>
-                            <option value="Justificacion de Inasistencia">Justificacion de Inasistencia</option>
-                            <option value="Carnet de Identidad">Carnet de Identidad</option>
-                        </select>
+                        <input type='text' value={motivoArchivo} onChange={(e) => setMotivoArchivo(e.target.value)} required/>
                     </div>
                     <div>
                         <label>Seleciona Archivo</label>
@@ -162,7 +162,7 @@ const RegistroDoc = () => {
             {showSuccessModal && (
                 <div className="success-modal">
                     <div className="success-modal-content">
-                        <FaRegCircleCheck className='icon'/>
+                        <FaRegCircleCheck className='iconn'/>
                         <h3>Registro Exitoso</h3>
                         <p>El documento se ha enviado correctamente.</p>
                     </div>
@@ -171,7 +171,8 @@ const RegistroDoc = () => {
             {errorModal && (
                 <div className="error-modal">
                 <div className="error-modal-content">
-                    <h3>Fallo al Registrar</h3>
+                    <BiError  className='iconn'/>
+                    <h3>Error al Registrar Documento</h3>
                     <p>Error al registrar Documento, Intente Nuevamente.</p>
                 </div>
             </div>  
