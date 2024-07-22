@@ -81,7 +81,7 @@ export const Panel = () => {
                                 {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
                                     <img src={`/${selectedDocument.archivo.path}`} alt="Archivo adjunto" />
                                 ) : (
-                                    <a href={`http://localhost:5000/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
+                                    <a href={`/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
                                         Ver archivo adjunto
                                     </a>
                                 )}
