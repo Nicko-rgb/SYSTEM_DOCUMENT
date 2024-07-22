@@ -41,6 +41,7 @@ export const Panel = () => {
     const handleSearchDni = (event) => {
         setSearchDni(event.target.value);
     };
+    
     const navegar = useNavigate()
     if(!userCarrera){
         navegar('/')
@@ -52,7 +53,7 @@ export const Panel = () => {
             <main className="main">
                 <div className="recibidos mensajes">
                     <div className="cabeza">
-                        <h2>Mensajes Nuevos</h2>
+                        <h2>Documentos Nuevos</h2>
                         <input className='buscar' type="text" placeholder='Buscar Documento por DNI' value={searchDni} onChange={handleSearchDni} />
                     </div>
                     <div className='box'>
@@ -81,7 +82,7 @@ export const Panel = () => {
                                 {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
                                     <img src={`/${selectedDocument.archivo.path}`} alt="Archivo adjunto" />
                                 ) : (
-                                    <a href={`/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
+                                    <a href={`http:/localhost:5000/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
                                         Ver archivo adjunto
                                     </a>
                                 )}
@@ -105,7 +106,7 @@ export const Panel = () => {
                 </div>
                 <div className="enviados mensajes">
                     <div className="cabeza">
-                        <h2>Mensajes Enviados</h2>
+                        <h2>Documentos Enviados</h2>
                     </div>
                     <div className="box">
                         {[...sentDocuments].reverse().map((document) => (

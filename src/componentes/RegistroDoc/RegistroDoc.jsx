@@ -19,7 +19,7 @@ const RegistroDoc = () => {
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [dni, setDni] = useState('');
-    const [receptor, setReceptor] = useState('');
+    const [receptor, setReceptor] = useState('Tesoreria');
     const [motivoArchivo, setMotivoArchivo] = useState('');
     const [archivo, setArchivo] = useState(null);
     const [txtArchivo, setTxtArchivo] = useState('');
@@ -34,7 +34,7 @@ const RegistroDoc = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        if (!receptor || !motivoArchivo) {
+        if (!receptor) {
             alert('Por favor, selecciona un receptor y un motivo de archivo.');
             return;
         }

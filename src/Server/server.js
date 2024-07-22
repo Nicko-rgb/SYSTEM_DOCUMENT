@@ -5,18 +5,8 @@ const multer = require('multer');
 const cors = require('cors');
 const path = require('path');
 
-
-// Servir archivos estáticos desde la carpeta build
-app.use(express.static(path.join(__dirname, '..', '..', 'build')));
-
-// Ruta para manejar todas las solicitudes y servir index.html
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'build', 'index.html'));
-});
-
 // Configurar el middleware para servir archivos estáticos
 app.use('/files', express.static(path.join(__dirname, 'files')));
-
 
 // Conectar a la base de datos MongoDB
 mongoose.connect('mongodb://localhost/system_documento');
@@ -57,7 +47,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Configurar CORS "ESTO ES MUY IMPORTANTE"
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000'); // Reemplaza con el dominio de tu aplicación React
+    res.setHeader('Access-Control-Allow-Origin', 'http://192.168.43.190:3000'); // Reemplaza con el dominio de tu aplicación React
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();

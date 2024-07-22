@@ -21,7 +21,7 @@ const Login = () => {
         e.preventDefault();
     
         try {
-            const response = await axios.post('/api/login', { admin, password });
+            const response = await axios.post('http://192.168.43.190:5000/api/login', { admin, password });
             console.log("Inicio de Sesión de usuario Exitoso");
             handleLogin(response.data.carrera, response.data.receivedDocuments, response.data.sentDocuments);
             navigate('/panel');
