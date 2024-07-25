@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './panel.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import EstadoSesion from '../Login/Sesion';
 import Navegador from '../Navegador/Navegador';
@@ -10,11 +10,20 @@ export const Panel = () => {
     const [allDocuments, setAllDocuments] = useState([]);
     const [selectedDocument, setSelectedDocument] = useState(null);
     const [searchDni, setSearchDni] = useState('');
+    const navigate = useNavigate();
+
+    // Redirigir si no hay usuario autenticado
+    // useEffect(() => {
+    //     if (!userCarrera) {
+    //         navigate('/');
+    //     }
+    // }, [userCarrera, navigate]);
 
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const response = await axios.get('/api/documents');
+                const response = await axios.get('/api/documents'); // Asegúrate de que esta URL sea correcta
+                console.log('Documentos obtenidos:', response.data); // Verifica los datos
                 setAllDocuments(response.data);
             } catch (error) {
                 console.error('Error al obtener los documentos:', error);
@@ -28,10 +37,7 @@ export const Panel = () => {
 
     const handleDocumentClick = async (document) => {
         try {
-            // Actualizar el documento en la base de datos
             await axios.patch(`/api/documents/${document._id}`, { leido: true });
-
-            // Actualizar el estado local
             setSelectedDocument(document);
         } catch (error) {
             console.error('Error al marcar el documento como leído:', error);
@@ -41,11 +47,7 @@ export const Panel = () => {
     const handleSearchDni = (event) => {
         setSearchDni(event.target.value);
     };
-    
-    const navegar = useNavigate()
-    if(!userCarrera){
-        navegar('/')
-    }
+    console.log('Valor de userCarrera:', userCarrera);
 
     return (
         <div className="panel">
@@ -82,7 +84,7 @@ export const Panel = () => {
                                 {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
                                     <img src={`/${selectedDocument.archivo.path}`} alt="Archivo adjunto" />
                                 ) : (
-                                    <a href={`http:/localhost:5000/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
+                                    <a href={`http://localhost:5000/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
                                         Ver archivo adjunto
                                     </a>
                                 )}
@@ -95,7 +97,6 @@ export const Panel = () => {
                                     </div>
                                 )}
                             </div>
-
                         </div>
                     )}
                     <div className="button">

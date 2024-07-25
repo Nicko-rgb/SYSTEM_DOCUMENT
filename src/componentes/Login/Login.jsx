@@ -17,22 +17,18 @@ const Login = () => {
         handleLogout(); // Esto eliminará el valor de userCarrera
       }, [handleLogout]);
 
-    const handleSubmit = async (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
     
         try {
-            const response = await axios.post('http://192.168.43.190:5000/api/login', { admin, password });
+            const response = await axios.post('/api/login', { admin, password });
             console.log("Inicio de Sesión de usuario Exitoso");
+            // Asegúrate de que handleLogin no cause un re-render inesperado
             handleLogin(response.data.carrera, response.data.receivedDocuments, response.data.sentDocuments);
             navigate('/panel');
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
-            alert("Error al iniciar sesionnn")
-            // if (error.response && error.response.data && error.response.data.message) {
-            //     console.log(error.response.data.message);
-            // } else {
-            //     alert("Error al iniciar sesión, intente nuevamenteeee");
-            // }
+            alert("Error al iniciar sesión");
         }
     };
 
