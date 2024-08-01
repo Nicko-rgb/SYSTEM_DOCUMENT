@@ -1,11 +1,13 @@
 import './registrodoc.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MdAddAPhoto } from 'react-icons/md';
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { BiError } from "react-icons/bi";
+import { FaFileSignature } from "react-icons/fa";
 import { BsFillSendFill } from "react-icons/bs";
+import { IoCloseSharp } from "react-icons/io5";
 import Tesseract from 'tesseract.js';
 import LoadingModal from '../Modal/Modal';
 import EstadoSesion from '../Login/Sesion';
@@ -26,12 +28,20 @@ const RegistroDoc = () => {
     const [motivoArchivo, setMotivoArchivo] = useState('');
     const [archivo, setArchivo] = useState(null);
     const [txtArchivo, setTxtArchivo] = useState('');
+    const [modalTexto, setModalTexto ] = useState(false)
+    const fileInputRef = useRef(null);
 
     const emisor = userCarrera;
 
     const noSesion = useNavigate()
     if (!userCarrera) {
         noSesion('/')
+    }
+    const abrirModalText = () => {
+        setModalTexto(true)
+    }
+    const cerrrarModaltext = () => {
+        setModalTexto(false)
     }
 
     const handleSubmit = async (e) => {
@@ -58,7 +68,7 @@ const RegistroDoc = () => {
             formData.append('archivo', archivo);
             formData.append('txtArchivo', txtArchivo);
 
-            await axios.post('http://localhost:5000/api/registrar', formData);
+            await axios.post('https://backenddocument-production.up.railway.app/api/registrar', formData);
             console.log('Documento enviado');
             setShowSuccessModal(true);
             setTimeout(() => {
@@ -98,6 +108,10 @@ const RegistroDoc = () => {
         } else {
             setTxtArchivo('');
         }
+    };
+
+    const handleSelectFile = () => {
+        fileInputRef.current.click();
     };
 
     const txtCute = txtArchivo.slice(0, 100);
@@ -146,13 +160,13 @@ const RegistroDoc = () => {
                         <label>Motivo de Documento</label>
                         <input type='text' value={motivoArchivo} onChange={(e) => setMotivoArchivo(e.target.value)} required />
                     </div>
-                    <div>
-                        <label>Seleciona Archivo</label>
-                        <input type="file" className="file" onChange={handleFileChange} />
+                    <div className='div_selec' onClick={handleSelectFile}>
+                        <p className="selec_archivo" > <FaFileSignature className='ico_subir' /> Selecciona Archivo</p>
+                        <input type="file" className="file" onChange={handleFileChange} style={{display: 'none'}} ref={fileInputRef} />
                     </div>
                     <div className="vistaPrevia">
                         {archivo && (
-                            <p style={{ whiteSpace: 'pre-wrap' }}>{txtCute}....<span> Ver más</span></p>
+                            <p style={{ whiteSpace: 'pre-wrap' }}>{txtCute}....<span onClick={abrirModalText}> Ver más</span></p>
                         )}
                     </div>
                     <div className="scann">
@@ -161,7 +175,7 @@ const RegistroDoc = () => {
                             <MdAddAPhoto className="linkIco" />
                         </Link>
                     </div>
-                    <button type="submit"><BsFillSendFill className='ico_subir' /> ENVIAR</button>
+                    <button type="submit"><BsFillSendFill /> ENVIAR</button>
                 </form>
             </main>
             <Link to="/extrae">Extraer</Link>
@@ -181,6 +195,13 @@ const RegistroDoc = () => {
                         <BiError className='iconn' />
                         <h3>Error al Registrar Documento</h3>
                         <p>Error al registrar Documento, Intente Nuevamente.</p>
+                    </div>
+                </div>
+            )}
+            {modalTexto && (
+                <div className="modal-text" onClick={cerrrarModaltext}>
+                    <div className="modal-text-content" onClick={(e) => e.stopPropagation()}>
+                        <p>{txtArchivo} </p>
                     </div>
                 </div>
             )}

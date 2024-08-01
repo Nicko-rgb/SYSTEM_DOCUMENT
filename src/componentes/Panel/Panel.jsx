@@ -19,7 +19,7 @@ export const Panel = () => {
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/documents'); // Asegúrate de que esta URL sea correcta
+                const response = await axios.get('https://backenddocument-production.up.railway.app/api/documents'); // Asegúrate de que esta URL sea correcta
                 console.log('Documentos obtenidos:', response.data); // Verifica los datos
                 setAllDocuments(response.data);
             } catch (error) {
@@ -42,7 +42,7 @@ export const Panel = () => {
             );
 
             // Enviar la actualización al servidor
-            await axios.patch(`http://localhost:5000/api/documents/${document._id}`, { leido: true });
+            await axios.patch(`https://backenddocument-production.up.railway.app/api/documents/${document._id}`, { leido: true });
 
             // Establecer el documento seleccionado
             setSelectedDocument(document);
@@ -81,7 +81,19 @@ export const Panel = () => {
                                 <h3>De: {document.emisor}</h3>
                                 <p><span>Estd:</span> {document.nombre} {document.apellido} </p>
                                 {/* Mostrar la fecha de creación */}
-                                <p>{new Date(document.createdAt.$date).toLocaleString()}</p>
+                                <div className="fecha_hora">
+                                    <p className='fecha'>{new Date(document.createdAt).toLocaleDateString('es-ES', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    })}</p>
+                                    {/* Mostrar la hora de creación */}
+                                    <p className='hora'>{new Date(document.createdAt).toLocaleTimeString('es-ES', {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false // Cambiar a true si deseas el formato de 12 horas
+                                    })}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -103,13 +115,13 @@ export const Panel = () => {
                             <div className="datosAdjunto">
                                 {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
                                     <img
-                                        src={`http://localhost:5000/${selectedDocument.archivo.path}`}
+                                        src={`https://backenddocument-production.up.railway.app/${selectedDocument.archivo.path}`}
                                         alt="Archivo adjunto"
-                                        onClick={() => openModal(`http://localhost:5000/${selectedDocument.archivo.path}`)}
+                                        onClick={() => openModal(`https://backenddocument-production.up.railway.app/${selectedDocument.archivo.path}`)}
                                         style={{ cursor: 'pointer' }} // Cambia el cursor al pasar sobre la imagen
                                     />
                                 ) : (
-                                    <a href={`http://localhost:5000/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
+                                    <a href={`https://backenddocument-production.up.railway.app/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
                                         Ver archivo adjunto
                                     </a>
                                 )}
@@ -134,11 +146,25 @@ export const Panel = () => {
                             <div key={document._id} className="mssg">
                                 <h3>Enviado a: {document.receptor}</h3>
                                 <p>Motivo: {document.motivoArchivo}</p>
+                                {/* Mostrar la fecha de creación */}
+                                <div className="fecha_hora">
+                                    <p className='fecha'>{new Date(document.createdAt).toLocaleDateString('es-ES', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    })}</p>
+                                    {/* Mostrar la hora de creación */}
+                                    <p className='hora'>{new Date(document.createdAt).toLocaleTimeString('es-ES', {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false // Cambiar a true si deseas el formato de 12 horas
+                                    })}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
-                <Link to="/registro" className='button'><BsFillSendPlusFill className='ico_panel'/> Enviar Documento </Link>
+                <Link to="/registro" className='button'><BsFillSendPlusFill className='ico_panel' /> Enviar Documento </Link>
             </main>
             {isModalOpen && (
                 <ImageModal

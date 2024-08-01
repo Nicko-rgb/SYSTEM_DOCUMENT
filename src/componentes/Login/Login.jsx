@@ -29,7 +29,7 @@ const Login = () => {
         try {
             showModal("Iniciando sesión...", "black");
 
-            const response = await axios.post('http://localhost:5000/api/login', { admin, password });
+            const response = await axios.post('https://backenddocument-production.up.railway.app/api/login', { admin, password });
             console.log("Inicio de Sesión de usuario Exitoso");
             handleLogin(response.data.carrera, response.data.receivedDocuments, response.data.sentDocuments);
             showModal("Inicio de sesión exitoso", "green");

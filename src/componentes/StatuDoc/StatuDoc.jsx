@@ -12,7 +12,7 @@ const EstadoDocumento = () => {
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/documents');
+                const response = await axios.get('https://backenddocument-production.up.railway.app/api/documents');
                 setAllDocuments(response.data);
             } catch (error) {
                 console.error('Error al obtener los documentos:', error);

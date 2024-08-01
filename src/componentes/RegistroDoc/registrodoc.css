@@ -116,6 +116,20 @@ form label {
     border-color: rgb(134, 24, 77);
     outline: none;
 }
+.registro .div_selec{
+    border: white solid 1px;
+    border-radius: 7px;
+    padding: 7px;
+    width: 200px;
+    margin: 0 auto;
+    color: white;
+    background: rgb(195, 162, 0);
+    font-family: 'poppins';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
 
 .registro form button {
     width: 100%;
@@ -254,4 +268,27 @@ form .file {
 .error-modal .iconn{
     font-size: 50px;
     color: red;
+}
+.modal-text{
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-text .modal-text-content{
+    background-color: white;
+    color: black;
+    max-width: 800px;
+    padding: 20px;
+    font-family: 'poppins';
+}
+.modal-text span{
+    color: white;
 }

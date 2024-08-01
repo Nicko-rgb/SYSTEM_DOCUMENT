@@ -147,19 +147,31 @@ main .mensajes .box h3 {
     white-space: nowrap;/* Evita que el texto se envuelva */
     overflow: hidden;/* Oculta cualquier parte del texto que exceda el ancho */
     text-overflow: ellipsis;/* Muestra puntos suspensivos al final del texto visible */
-    margin: 0;
 }
-
-main .mensajes p {
-    font-size: 15px;
+.panel main .box p {
+    font-size: 14px;
     white-space: nowrap;/* Evita que el texto se envuelva */
     overflow: hidden;/* Oculta cualquier parte del texto que exceda el ancho */
     text-overflow: ellipsis;/* Muestra puntos suspensivos al final del texto visible */
-
 }
+.panel main .box .fecha_hora{
+    position: relative;
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+}
+.panel main .box .fecha{
+    font-size: 11px;
+    color: gray;
+}
+.panel main .box .hora{
+    font-size: 11px;
+    color: gray;
+} 
 
 .panel .mensajes .box span {
     text-decoration: none;
+    font-size: 14px;
 }
 
 /*****************************************/
