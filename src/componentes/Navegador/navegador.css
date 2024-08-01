@@ -3,35 +3,42 @@
     top: 0;
     text-align: center;
     height: 90px;
-    background-color: rgb(17, 90, 132);
+    background-color: rgb(55, 174, 148);
     color: white;
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    gap: 25vw;
+    font-family: 'poppins';
     padding: 10px;
 }
+
 .navegador img{
     width: 70px;
 }
 .navegador h2 {
-    font-size: 24px;
+    font-size: 22px;
     margin: 0;
-    font-family: calibri;
 }
 
 .navegador p {
-    font-size: 20px;
-    font-family: calibri;
+    font-size: 17px;
 }
 .navegador .boton{
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(199, 1, 54);
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s ease;
+}
+.navegador .boton:hover{
+    color: white;
+    transition: .3s ease;
 }
 .navegador .icono{
-    box-shadow: 0 0 5px white;
-    font-size: 35px;
-    padding: 7px;
+    font-size:28px;
     border-radius: 50%;
-    color: white;
 }

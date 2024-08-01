@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './panel.css';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { BsFillSendPlusFill } from "react-icons/bs";
 import EstadoSesion from '../Login/Sesion';
 import Navegador from '../Navegador/Navegador';
+import ImageModal from './ModalImg';
 
 export const Panel = () => {
     const { userCarrera } = EstadoSesion();
     const [allDocuments, setAllDocuments] = useState([]);
     const [selectedDocument, setSelectedDocument] = useState(null);
     const [searchDni, setSearchDni] = useState('');
-    const navigate = useNavigate();
 
-    // Redirigir si no hay usuario autenticado
-    // useEffect(() => {
-    //     if (!userCarrera) {
-    //         navigate('/');
-    //     }
-    // }, [userCarrera, navigate]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState('');
 
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const response = await axios.get('/api/documents'); // Asegúrate de que esta URL sea correcta
+                const response = await axios.get('http://localhost:5000/api/documents'); // Asegúrate de que esta URL sea correcta
                 console.log('Documentos obtenidos:', response.data); // Verifica los datos
                 setAllDocuments(response.data);
             } catch (error) {
@@ -37,7 +34,17 @@ export const Panel = () => {
 
     const handleDocumentClick = async (document) => {
         try {
-            await axios.patch(`/api/documents/${document._id}`, { leido: true });
+            // Actualizar el documento en el estado local
+            setAllDocuments(prevDocuments =>
+                prevDocuments.map(doc =>
+                    doc._id === document._id ? { ...doc, leido: true } : doc
+                )
+            );
+
+            // Enviar la actualización al servidor
+            await axios.patch(`http://localhost:5000/api/documents/${document._id}`, { leido: true });
+
+            // Establecer el documento seleccionado
             setSelectedDocument(document);
         } catch (error) {
             console.error('Error al marcar el documento como leído:', error);
@@ -47,7 +54,16 @@ export const Panel = () => {
     const handleSearchDni = (event) => {
         setSearchDni(event.target.value);
     };
-    console.log('Valor de userCarrera:', userCarrera);
+
+    const openModal = (imageSrc) => {
+        setSelectedImage(imageSrc);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedImage('');
+    };
 
     return (
         <div className="panel">
@@ -62,8 +78,10 @@ export const Panel = () => {
                         {receivedDocuments.slice().reverse().map((document) => (
                             <div key={document._id} className={`mssg ${!document.leido ? 'nuevo' : ''}`} onClick={() => handleDocumentClick(document)}>
                                 <div className={`punto ${document.leido ? 'leido' : ''}`}></div>
-                                <h3>Recibido de: {document.emisor}</h3>
+                                <h3>De: {document.emisor}</h3>
                                 <p><span>Estd:</span> {document.nombre} {document.apellido} </p>
+                                {/* Mostrar la fecha de creación */}
+                                <p>{new Date(document.createdAt.$date).toLocaleString()}</p>
                             </div>
                         ))}
                     </div>
@@ -79,10 +97,17 @@ export const Panel = () => {
                                 <p><span>Receptor:</span> {selectedDocument.receptor}</p>
                                 <p><span>Emisor:</span> {selectedDocument.emisor}</p>
                                 <p><span>Motivo de Archivo:</span> {selectedDocument.motivoArchivo}</p>
+                                {/* Mostrar la fecha de creación en los detalles */}
+                                <p><span>Fecha de </span> {new Date(selectedDocument.createdAt.$date).toLocaleString()}</p>
                             </div>
                             <div className="datosAdjunto">
                                 {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
-                                    <img src={`/${selectedDocument.archivo.path}`} alt="Archivo adjunto" />
+                                    <img
+                                        src={`http://localhost:5000/${selectedDocument.archivo.path}`}
+                                        alt="Archivo adjunto"
+                                        onClick={() => openModal(`http://localhost:5000/${selectedDocument.archivo.path}`)}
+                                        style={{ cursor: 'pointer' }} // Cambia el cursor al pasar sobre la imagen
+                                    />
                                 ) : (
                                     <a href={`http://localhost:5000/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
                                         Ver archivo adjunto
@@ -99,11 +124,6 @@ export const Panel = () => {
                             </div>
                         </div>
                     )}
-                    <div className="button">
-                        <Link to="/registro">
-                            <button>Subir Nuevo</button>
-                        </Link>
-                    </div>
                 </div>
                 <div className="enviados mensajes">
                     <div className="cabeza">
@@ -118,7 +138,15 @@ export const Panel = () => {
                         ))}
                     </div>
                 </div>
+                <Link to="/registro" className='button'><BsFillSendPlusFill className='ico_panel'/> Enviar Documento </Link>
             </main>
+            {isModalOpen && (
+                <ImageModal
+                    isOpen={isModalOpen}
+                    imageSrc={selectedImage}
+                    onClose={closeModal}
+                />
+            )}
         </div>
     );
 };

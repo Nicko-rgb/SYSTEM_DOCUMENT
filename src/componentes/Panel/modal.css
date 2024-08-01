@@ -1,0 +1,35 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    z-index: 1000; /* Asegúrate de que el modal esté por encima de otros elementos */
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 100%;
+    border: rgb(55, 174, 148) solid 2px;
+    padding: 3px;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    font-size: 40px;
+    color: red;
+    cursor: pointer;
+}

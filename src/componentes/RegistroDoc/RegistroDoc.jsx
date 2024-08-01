@@ -5,10 +5,13 @@ import axios from 'axios';
 import { MdAddAPhoto } from 'react-icons/md';
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { BiError } from "react-icons/bi";
+import { BsFillSendFill } from "react-icons/bs";
 import Tesseract from 'tesseract.js';
 import LoadingModal from '../Modal/Modal';
 import EstadoSesion from '../Login/Sesion';
 import Navegador from '../Navegador/Navegador';
+
+import { IoArrowBackSharp } from "react-icons/io5";
 
 const RegistroDoc = () => {
     const [loading, setLoading] = useState(false);
@@ -25,25 +28,25 @@ const RegistroDoc = () => {
     const [txtArchivo, setTxtArchivo] = useState('');
 
     const emisor = userCarrera;
-    
+
     const noSesion = useNavigate()
-    if(!userCarrera){
+    if (!userCarrera) {
         noSesion('/')
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         if (!receptor) {
             alert('Por favor, selecciona un receptor y un motivo de archivo.');
             return;
         }
-    
+
         if (!archivo) {
             alert('Por favor, selecciona un archivo.');
             return;
         }
-    
+
         try {
             const formData = new FormData();
             formData.append('nombre', nombre);
@@ -55,7 +58,7 @@ const RegistroDoc = () => {
             formData.append('archivo', archivo);
             formData.append('txtArchivo', txtArchivo);
 
-            await axios.post('/api/registrar', formData);
+            await axios.post('http://localhost:5000/api/registrar', formData);
             console.log('Documento enviado');
             setShowSuccessModal(true);
             setTimeout(() => {
@@ -102,8 +105,12 @@ const RegistroDoc = () => {
     return (
         <div className="registro">
             <Navegador />
-            <div className='subRegis'>
+            <main className='subRegis'>
+
                 <form onSubmit={handleSubmit}>
+                    <Link to='/panel'>
+                        <IoArrowBackSharp className='volverIco' />
+                    </Link>
                     <h3>FORMULARIO DE REGISTRO DE DOCUMENTO</h3>
                     <div>
                         <label>Nombre:</label>
@@ -115,7 +122,7 @@ const RegistroDoc = () => {
                     </div>
                     <div>
                         <label>DNI:</label>
-                        <input type="text" value={dni} onChange={(e) => setDni(e.target.value)} required/>
+                        <input type="text" value={dni} onChange={(e) => setDni(e.target.value)} required />
                     </div>
                     <div>
                         <label>Enviar a:</label>
@@ -137,7 +144,7 @@ const RegistroDoc = () => {
                     </div>
                     <div>
                         <label>Motivo de Documento</label>
-                        <input type='text' value={motivoArchivo} onChange={(e) => setMotivoArchivo(e.target.value)} required/>
+                        <input type='text' value={motivoArchivo} onChange={(e) => setMotivoArchivo(e.target.value)} required />
                     </div>
                     <div>
                         <label>Seleciona Archivo</label>
@@ -154,15 +161,15 @@ const RegistroDoc = () => {
                             <MdAddAPhoto className="linkIco" />
                         </Link>
                     </div>
-                    <button type="submit">ENVIAR</button>
+                    <button type="submit"><BsFillSendFill className='ico_subir' /> ENVIAR</button>
                 </form>
-            </div>
+            </main>
             <Link to="/extrae">Extraer</Link>
             <LoadingModal isOpen={loading} onClose={() => setLoading(false)} />
             {showSuccessModal && (
                 <div className="success-modal">
                     <div className="success-modal-content">
-                        <FaRegCircleCheck className='iconn'/>
+                        <FaRegCircleCheck className='iconn' />
                         <h3>Registro Exitoso</h3>
                         <p>El documento se ha enviado correctamente.</p>
                     </div>
@@ -170,12 +177,12 @@ const RegistroDoc = () => {
             )}
             {errorModal && (
                 <div className="error-modal">
-                <div className="error-modal-content">
-                    <BiError  className='iconn'/>
-                    <h3>Error al Registrar Documento</h3>
-                    <p>Error al registrar Documento, Intente Nuevamente.</p>
+                    <div className="error-modal-content">
+                        <BiError className='iconn' />
+                        <h3>Error al Registrar Documento</h3>
+                        <p>Error al registrar Documento, Intente Nuevamente.</p>
+                    </div>
                 </div>
-            </div>  
             )}
         </div>
     );

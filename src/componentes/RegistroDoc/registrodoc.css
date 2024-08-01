@@ -3,26 +3,54 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    background-image: url('https://www.prasaga.com/wp-content/uploads/2022/11/PoW-Images_0002_PoW3-2400x1260.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.registro .navegador{
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+}
+.registro .navegador .boton{
+    color: white;
+}
+.registro .navegador .boton:hover{
+    color: rgb(255, 86, 86);
 }
 .registro .subRegis {
     display: flex;
+    position: relative;
     flex-direction: column;
     padding: 100px;
 }
 .registro form {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    box-shadow: 0 0 3px rgb(253, 97, 40);
     padding: 20px;
     border-radius: 10px;
-    background-color: rgb(205, 232, 227);
     margin: 0 auto;
     max-width: 500px;
+    backdrop-filter: blur(20px);
+}
+.registro form {
+    /* background-color: white; */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 3px rgb(51, 143, 123);
+    transition: 0.3s ease;
+}
+.registro form:hover{
+    box-shadow: 0 0 15px rgb(51, 143, 123);
+    border:rgb(51, 143, 123) solid 1px ;
 }
 
 .registro form h3 {
     text-align: center;
+    color: white;
 }
 
 form div {
@@ -37,6 +65,7 @@ form div {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    display: none;
 }
 
 .scann .div {
@@ -70,17 +99,43 @@ form div {
 
 form label {
     margin-left: 3px;
-    color: brown;
-    font-family: calibri;
+    color: white;
+    font-family: 'poppins';
 }
 
-form input,
-select {
-    outline: none;
-    border: none;
-    border-radius: 0px;
+.registro form input, select {
+    width: 100%;
     padding: 7px;
-    font-size: 17px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: 'poppins';
+}
+
+.registro form input, select:focus {
+    border-color: rgb(134, 24, 77);
+    outline: none;
+}
+
+.registro form button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(55, 174, 148);
+    color: white;
+    font-family: 'poppins';
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.registro form button:hover {
+    background-color: rgb(51, 151, 130);
 }
 
 .registro form .vistaPrevia {
@@ -120,18 +175,18 @@ form .file {
     box-shadow: none;
 }
 
-form button {
-    border: none;
-    border-radius: 6px;
-    height: 35px;
-    width: 150px;
-    font-weight: bold;
-    margin: 0 auto;
-    border: none;
-    background: rgb(253, 97, 40);
-    color: white;
-    box-shadow: 0 0 4px green;
+
+.registro form .volverIco{
+    position: absolute;
+    left: -40px;
+    top: -40px;
+    font-size: 38px;
+    padding: 5px;
     cursor: pointer;
+    color: white;
+}
+.registro form .volverIco:hover{
+    color: rgb(208, 208, 208);
 }
 
 /***************************************************************************/

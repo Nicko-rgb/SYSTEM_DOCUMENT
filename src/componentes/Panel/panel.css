@@ -2,25 +2,31 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    /* padding: 5px; */
     gap: 5px;
     overflow-y: auto;
     background: rgb(240, 255, 251);
 }
 
-.panel .button button {
-    position: absolute;
-    right: 20px;
-    bottom: 16.5px;
-    width: 120px;
-    height: 40px;
-    background: rgb(17, 90, 132);
+.panel .button {
+    position: fixed;
+    right: 50px;
+    bottom: 40px;
+    padding: 12px;
+    background: rgb(55, 174, 148);
     color: white;
     border: none;
     border-radius: 8px;
     font-weight: bold;
+    text-decoration: none;
     animation: flotar .5s ease infinite;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+}
+.panel .button .ico_panel{
+    font-size: 22px;
 }
 
 @keyframes flotar {
@@ -37,8 +43,8 @@
     }
 }
 
-.panel .button button:hover {
-    background: rgba(17, 90, 132, 0.506);
+.panel .button:hover {
+    background: rgba(46, 209, 168, 0.869);
     color: black;
     animation-play-state: paused;
 }
@@ -52,12 +58,25 @@
     padding: 5px;
 }
 
+/*Estylos para mensajes*/
+main .mensajes {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    position: relative;
+    padding: 2px;
+    transition: .3s ease;
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+}
+
 main .mensajes .cabeza {
     background: rgb(234, 255, 255);
     display: flex;
     flex-direction: column;
     gap: 6px;
-    padding: 5px;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -66,9 +85,9 @@ main .mensajes .cabeza {
 main .mensajes .cabeza h2 {
     text-align: center;
     font-size: 18px;
-    font-family: arial narrow;
+    font-family: 'poppins';
     padding: 5px;
-    background: rgb(17, 90, 132);
+    background: rgb(55, 174, 148);
     color: white;
 }
 
@@ -80,9 +99,9 @@ main .mensajes .buscar {
     font-size: 17px;
     text-align: center;
     border-radius: 6px;
+    margin-bottom: 10px;
 }
 
-/*Estylos de scroll*/
 .content::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -92,71 +111,73 @@ main .mensajes .buscar {
 .content::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 5px;
-
 }
 
 .content::-webkit-scrollbar-thumb:hover {
     background-color: #555;
 }
 
-/*Estylos para mensajes*/
-main .mensajes {
-    border: green solid 1px;
-    background: rgb(234, 255, 255);
-    width: 250px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    position: relative;
-
-    &::-webkit-scrollbar {
-        width: 0px;
-    }
-}
-
 .panel main .mensajes .box {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 5px;
 }
 
 .panel main .mensajes .box .mssg {
-    box-shadow: 0 0 2px rgb(17, 90, 132);
-    border-radius: 7px;
-    padding: 8px;
-    margin-top: 7px;
+    box-shadow: 0 0 1px rgb(55, 174, 148);
+    padding: 5px 10px;
+    height: 65px;
+    min-height: 65px;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: rgb(193, 246, 248);
+    background: white;
     cursor: pointer;
     transition: 0.2s ease;
+    font-family: 'poppins';
 }
 
 .panel main .mensajes .box .mssg:hover {
-    background: rgb(147, 224, 225);
-    transform: scale(1.02);
+    background: rgba(55, 174, 148, 0.103);
 }
 
 main .mensajes .box h3 {
-    font-size: 16px;
-    font-family: calibri;
+    font-size: 14px;
+    white-space: nowrap;/* Evita que el texto se envuelva */
+    overflow: hidden;/* Oculta cualquier parte del texto que exceda el ancho */
+    text-overflow: ellipsis;/* Muestra puntos suspensivos al final del texto visible */
+    margin: 0;
 }
 
 main .mensajes p {
-    font-size: 16px;
+    font-size: 15px;
+    white-space: nowrap;/* Evita que el texto se envuelva */
+    overflow: hidden;/* Oculta cualquier parte del texto que exceda el ancho */
+    text-overflow: ellipsis;/* Muestra puntos suspensivos al final del texto visible */
+
+}
+
+.panel .mensajes .box span {
+    text-decoration: none;
 }
 
 /*****************************************/
 /*Stylo para punto*/
 .punto {
-    width: 10px;
-    height: 10px;
-    background-color: blue;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 7px;
+    height: 7px;
+    background-color: rgb(55, 174, 148);
     border-radius: 50%;
-    margin-right: 10px;
+    animation: scalar 1s linear infinite;
+}
+@keyframes scalar {
+    0% { transform: scale(1);}
+    50% { transform: scale(1.7);}
+    100% { transform: scale(1);}
 }
 
 .punto.leido {
@@ -172,12 +193,12 @@ main .content {
     position: relative;
     flex: 1;
     overflow-y: auto;
-    box-shadow: 0 0 5px green;
+    box-shadow: 0 0 1.5px green;
     background-color: rgb(237, 252, 255);
-    border-radius: 10px;
     margin: 8px;
     margin-top: 3px;
     margin-bottom: 0;
+    transition: .3s ease;
 }
 
 .content .subContent {
@@ -191,7 +212,8 @@ main .content {
 
 .subContent>h3 {
     text-align: center;
-    font-family: arial narrow;
+    font-family: calibri;
+    font-size: 20px;
     padding: 7px;
     padding-bottom: 0;
 }
@@ -201,18 +223,16 @@ main .content {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    font-family: 'poppins';
     padding-bottom: 10px;
 }
 
 span {
     font-weight: bold;
-    font-family: calibri;
-    text-decoration: underline;
 }
 
 .content .datostxt span {
     font-size: .95rem;
-    font-family: arial narrow;
 }
 
 .content .datosAdjunto {
@@ -220,6 +240,7 @@ span {
     justify-content: space-evenly;
     width: 100%;
     gap: 10px;
+    padding: 5px;
 }
 
 .content .subContent img {
@@ -229,7 +250,7 @@ span {
     padding: 10px;
     border-radius: 10px;
     background: rgba(159, 169, 159, 0.036);
-    box-shadow: 0 0 5px green;
+    box-shadow: 0 0 2px green;
     object-fit: contain;
 }
 
@@ -281,7 +302,7 @@ span {
 }
 
 .content .subContent .boxTxt {
-    box-shadow: 0 0 5px green;
+    box-shadow: 0 0 2px green;
     background: rgba(0, 128, 0, 0.036);
     white-space: pre-wrap;
     border-radius: 10px;
@@ -296,7 +317,7 @@ span {
 
 .subContent .boxTxt h3 {
     text-align: center;
-    font-family: arial narrow;
+    font-family: calibri;
     text-decoration: underline;
     padding: 10px;
     height: 43px;
@@ -308,7 +329,7 @@ span {
 }
 
 .subContent .boxTxt p {
-    font-family: arial;
+    font-family: 'poppins';
     font-size: 15px;
     text-align: justify;
     background: white;
@@ -330,4 +351,28 @@ span {
 
 .boxTxt>div::-webkit-scrollbar-thumb:hover {
     background-color: #555;
+}
+
+@media (max-width: 1200px){
+    .panel .content .datosAdjunto{
+        flex-wrap: wrap;
+        padding: 0;
+        margin-bottom: 200px;
+    }
+    .panel .datosAdjunto img{
+        object-fit: cover;
+        max-width: 500px;
+    }
+}
+@media (max-width: 1000px) {
+    .panel .enviados{
+        transition: .3s ease;
+        display: none;
+    }
+}
+@media (max-width: 750px) {
+    .panel main .mensajes{
+        width: 220px;
+        transition: .3s ease;
+    }
 }

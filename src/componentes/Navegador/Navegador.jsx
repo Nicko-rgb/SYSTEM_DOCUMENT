@@ -14,13 +14,11 @@ export const Navegador = () => {
             <div className="logo">
                 <img src={logoSuiza} alt="" />
             </div>
-            <div>
+            <div className='medio'>
                 <h2>Panel de {userCarrera} </h2>
                 <p>Sistema de Envios de Documentos</p>
             </div>
-            <Link to='/' className="boton" onClick={handleLogout}>
-                <IoLogOutOutline className="icono" />
-            </Link>
+            <Link to='/' className="boton" onClick={handleLogout}><IoLogOutOutline className="icono" />Cerrrar Sesion</Link>
         </div>
     )
 }

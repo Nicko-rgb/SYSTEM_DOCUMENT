@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .login {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
     background-color: #f0f4f8;
     background-image: url('https://www.prasaga.com/wp-content/uploads/2022/11/PoW-Images_0002_PoW3-2400x1260.jpg');
@@ -44,6 +47,7 @@ h1 {
     margin-bottom: 5px;
     color: white;
     font-size: 17px;
+    font-family: 'poppins';
 }
 
 .input-field {
@@ -74,19 +78,79 @@ h1 {
 }
 
 .submit-button:hover {
-    background-color: rgb(24, 109, 90);
+    background-color: rgb(51, 151, 130);
 }
 
-.reset, .document-status {
+.document-status {
     margin-top: 15px;
+    background-color: rgb(55, 174, 148);
+    border-radius: 8px;
+    padding: 10px;
 }
 
-.reset a, .document-status a {
+.document-status a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.icon1{
+    font-size: 22px;
 }
 
 .reset a:hover, .document-status a:hover {
     text-decoration: underline;
+}
+
+
+
+
+
+
+.modal_sesion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+}
+
+.modal_sesion .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.modal_sesion .loader {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid rgb(220, 252, 252);
+    border-top: 4px solid rgb(55, 174, 148);
+    animation: spin 1s linear infinite;
+}
+.modal_sesion .modal-content p{
+    text-align: center;
+    font-family: 'poppins';
+}
+
+/* Definir la animación de rotación */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
