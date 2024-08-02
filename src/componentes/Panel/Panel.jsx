@@ -19,8 +19,7 @@ export const Panel = () => {
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                const response = await axios.get('https://backenddocument-production.up.railway.app/api/documents'); // Asegúrate de que esta URL sea correcta
-                console.log('Documentos obtenidos:', response.data); // Verifica los datos
+                const response = await axios.get('https://backenddocument-production-128c.up.railway.app/api/documents');
                 setAllDocuments(response.data);
             } catch (error) {
                 console.error('Error al obtener los documentos:', error);
@@ -40,9 +39,8 @@ export const Panel = () => {
                     doc._id === document._id ? { ...doc, leido: true } : doc
                 )
             );
-
             // Enviar la actualización al servidor
-            await axios.patch(`https://backenddocument-production.up.railway.app/api/documents/${document._id}`, { leido: true });
+            await axios.patch(`https://backenddocument-production-128c.up.railway.app/api/documents/${document._id}`, { leido: true });
 
             // Establecer el documento seleccionado
             setSelectedDocument(document);
@@ -115,13 +113,13 @@ export const Panel = () => {
                             <div className="datosAdjunto">
                                 {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
                                     <img
-                                        src={`https://backenddocument-production.up.railway.app/${selectedDocument.archivo.path}`}
+                                        src={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`}
                                         alt="Archivo adjunto"
-                                        onClick={() => openModal(`https://backenddocument-production.up.railway.app/${selectedDocument.archivo.path}`)}
+                                        onClick={() => openModal(`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`)}
                                         style={{ cursor: 'pointer' }} // Cambia el cursor al pasar sobre la imagen
                                     />
                                 ) : (
-                                    <a href={`https://backenddocument-production.up.railway.app/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
+                                    <a href={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
                                         Ver archivo adjunto
                                     </a>
                                 )}

@@ -6,7 +6,6 @@ import Scaner from './componentes/Scaner/Scaner';
 import Extrae from './componentes/RegistroDoc/Extrae';
 import Panel from './componentes/Panel/Panel';
 import StatuDoc from './componentes/StatuDoc/StatuDoc';
-import FileUpload from './componentes/Grid/FileUpload';
 
 function App() {
     return (
@@ -18,7 +17,6 @@ function App() {
                 <Route path="/extrae" element={<Extrae />} />
                 <Route path="/panel" element={<Panel />} />
                 <Route path="/document-status" element={<StatuDoc />} />
-                <Route path="/file-upload" element={<FileUpload />} />
             </Routes>
         </BrowserRouter>
     );

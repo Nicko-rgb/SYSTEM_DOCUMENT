@@ -9,8 +9,8 @@ const path = require('path');
 app.use('/files', express.static(path.join(__dirname, 'files')));
 
 // Conectar a la base de datos MongoDB Atlas
-// const uri = "mongodb://localhost:27017/system_documento";
-const uri = "mongodb+srv://mancillanixon7:um8xTFnPbq9eMwnx@systemdsi.mouqdaf.mongodb.net/system_documento?retryWrites=true&w=majority";
+const uri = "mongodb://localhost:27017/system_documento";
+// const uri = "mongodb+srv://mancillanixon7:um8xTFnPbq9eMwnx@systemdsi.mouqdaf.mongodb.net/system_documento?retryWrites=true&w=majority";
 
 mongoose.connect(uri)
 .then(() => console.log('Conectado a MongoDB Atlas!'))

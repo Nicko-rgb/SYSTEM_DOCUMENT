@@ -7,7 +7,6 @@ import { FaRegCircleCheck } from "react-icons/fa6";
 import { BiError } from "react-icons/bi";
 import { FaFileSignature } from "react-icons/fa";
 import { BsFillSendFill } from "react-icons/bs";
-import { IoCloseSharp } from "react-icons/io5";
 import Tesseract from 'tesseract.js';
 import LoadingModal from '../Modal/Modal';
 import EstadoSesion from '../Login/Sesion';
@@ -68,7 +67,7 @@ const RegistroDoc = () => {
             formData.append('archivo', archivo);
             formData.append('txtArchivo', txtArchivo);
 
-            await axios.post('https://backenddocument-production.up.railway.app/api/registrar', formData);
+            await axios.post('https://backenddocument-production-128c.up.railway.app/api/registrar', formData);
             console.log('Documento enviado');
             setShowSuccessModal(true);
             setTimeout(() => {
