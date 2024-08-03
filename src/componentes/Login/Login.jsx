@@ -66,9 +66,6 @@ const Login = () => {
                     </div>
                     <button type="submit" className="submit-button">INGRESAR</button>
                 </form>
-                <div className="reset">
-                    {/* <a href="/reset">Olvidé mi Clave</a> */}
-                </div>
             </div>
             <div className="document-status">
                 <a href="/document-status"><GrStatusGood className='icon1'/> ¡Ver estado de documento!</a>

@@ -5,10 +5,10 @@ const EstadoSesion = () => {
     const [userCarrera, setUserCarrera] = useState('');
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
+        const storedCarrera = localStorage.getItem('userCarrera');
+        if (storedCarrera) {
             setIsLoggedIn(true);
-            setUserCarrera(localStorage.getItem('userCarrera'));
+            setUserCarrera(storedCarrera);
         }
     }, []);
 

@@ -16,6 +16,8 @@ export const Panel = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
 
+    const userA = localStorage.getItem('userCarrera'); 
+
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
@@ -69,7 +71,7 @@ export const Panel = () => {
             <main className="main">
                 <div className="recibidos mensajes">
                     <div className="cabeza">
-                        <h2>Documentos Nuevos</h2>
+                        <h2>Documentos Nuevos {userA}</h2>
                         <input className='buscar' type="text" placeholder='Buscar Documento por DNI' value={searchDni} onChange={handleSearchDni} />
                     </div>
                     <div className='box'>
