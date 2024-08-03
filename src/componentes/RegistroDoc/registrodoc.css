@@ -21,7 +21,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    padding: 100px;
+    padding: 80px;
 }
 .registro form {
     position: relative;
@@ -38,14 +38,12 @@
     /* background-color: white; */
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 3px rgb(51, 143, 123);
     transition: 0.3s ease;
 }
 .registro form:hover{
     box-shadow: 0 0 15px rgb(51, 143, 123);
-    border:rgb(51, 143, 123) solid 1px ;
 }
 
 .registro form h3 {
@@ -60,42 +58,6 @@ form div {
 }
 
 
-.registro form .scann {
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    display: none;
-}
-
-.scann .div {
-    position: absolute;
-    box-shadow: green 0 0 2px;
-    border-radius: 5px;
-    padding: 6px;
-    display: grid;
-    place-items: center;
-    right: 0;
-    text-decoration: none;
-    transition: 0.5s ease;
-    margin-top: -20px;
-}
-
-.scann label {
-    font-size: 14px;
-    color: orangered;
-    pointer-events: none;
-}
-
-.scann .linkIco {
-    color: orangered;
-    font-size: 25px;
-}
-
-.scann .div:hover {
-    box-shadow: green 0 0 5px;
-    font-weight: bold;
-}
 
 form label {
     margin-left: 3px;
@@ -153,12 +115,10 @@ form label {
 }
 
 .registro form .vistaPrevia {
-    padding: 7px;
     box-shadow: 0 0 2px brown;
     border-radius: 4px;
-    max-height: 150px;
+    max-height: 170px;
     overflow-y: auto;
-    padding-bottom: 30px;
 }
 
 .registro form .vistaPrevia h3 {
@@ -198,11 +158,30 @@ form .file {
     padding: 5px;
     cursor: pointer;
     color: white;
+    border-radius: 4px;
+    transition: .3s ease;
 }
 .registro form .volverIco:hover{
+    transition: .3s ease;
     color: rgb(208, 208, 208);
+    box-shadow: 0 0 3px white;
 }
-
+.registro .icon_reload{
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    font-size: 38px;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+    border-radius: 4px;
+    transition: .3s ease;
+}
+.registro .icon_reload:hover{
+    transition: .3s ease;
+    color: rgb(208, 208, 208);
+    box-shadow: 0 0 3px white;
+}
 /***************************************************************************/
 /*ESTILO PARA LOADER Y MODAL
 /***************************************************************************/
@@ -220,13 +199,13 @@ form .file {
     align-items: center;
 }
 .success-modal h3{
-    color: green;
+    color: rgb(55, 174, 148);
 }
 
 .success-modal-content {
     position: relative;
     background-color: white;
-    box-shadow: 0 0 5px green;
+    box-shadow: 0 0 10px rgb(55, 174, 148);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -236,7 +215,7 @@ form .file {
 }
 .success-modal-content .iconn{
     font-size: 50px;
-    color: green;
+    color: rgb(55, 174, 148);
 }
 
 
@@ -269,26 +248,91 @@ form .file {
     font-size: 50px;
     color: red;
 }
-.modal-text{
+
+
+.modal-text {
     position: fixed;
-    z-index: 999;
+    z-index: 99;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-y: auto; 
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding: 20px;
 }
-.modal-text .modal-text-content{
+
+.modal-text .modal-text-content {
     background-color: white;
     color: black;
-    max-width: 800px;
+    width: auto;
     padding: 20px;
     font-family: 'poppins';
+    border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    margin: auto; 
+    overflow: hidden;
 }
-.modal-text span{
+
+.modal-text .modal-text-content p {
+    text-align: justify;
+    margin: 0; 
+}
+
+.modal-text .icon_text_cerrar {
+    position: fixed;
     color: white;
+    font-size: 35px;
+    top: 10px;
+    right: 20px; 
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 1px white;
+    transition: .3s ease;
+    cursor: pointer;
+}
+
+.modal-text .icon_text_cerrar:hover {
+    transition: .3s ease;
+    box-shadow: 0 0 4px white;
+}
+
+.loading-modal2 {
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; 
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.loading-modal2 .loading-modal-content2{
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgb(55, 174, 148);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+.loading-modal2 .loader{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid rgb(220, 252, 252);
+    border-top: 4px solid rgb(55, 174, 148);
+    animation: spin 1s linear infinite;;
+}
+.loading-modal2 p{
+    color: black;
+    font-family: 'poppins';
 }

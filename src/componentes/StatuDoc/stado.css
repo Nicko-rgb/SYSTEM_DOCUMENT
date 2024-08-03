@@ -29,13 +29,27 @@
 .estado .buscar div{
     display: flex;
     gap: 20px;
+    align-items: center;
+}
+.estado .buscar div .ico_volver{
+    font-size: 32px;
+    padding: 5px;
+    transition: .3s ease;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.estado .buscar div .ico_volver:hover{
+    box-shadow: 0 0 4px white;
+    transition: .3s ease;
+    transform: scale(1.02);
 }
 .estado .buscar input{
     border: none;
     box-shadow: 0 0 2px aqua;
     backdrop-filter: blur(10px);
     border-radius: 5px;
-    padding: 6px;
+    padding: 7px;
     outline: none;
     text-align: center;
     background: transparent;

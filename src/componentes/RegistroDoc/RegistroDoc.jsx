@@ -1,8 +1,7 @@
 import './registrodoc.css';
-import { useState, useRef } from 'react';
+import { useState, useRef, useTransition } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { MdAddAPhoto } from 'react-icons/md';
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { BiError } from "react-icons/bi";
 import { FaFileSignature } from "react-icons/fa";
@@ -11,23 +10,25 @@ import Tesseract from 'tesseract.js';
 import LoadingModal from '../Modal/Modal';
 import EstadoSesion from '../Login/Sesion';
 import Navegador from '../Navegador/Navegador';
-
 import { IoArrowBackSharp } from "react-icons/io5";
+import { AiOutlineReload } from "react-icons/ai";
+import { IoMdClose } from "react-icons/io";
 
 const RegistroDoc = () => {
     const [loading, setLoading] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [errorModal, setErrorModal] = useState(false)
     const { userCarrera } = EstadoSesion();
-
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [dni, setDni] = useState('');
-    const [receptor, setReceptor] = useState('Tesoreria');
+    const [receptor, setReceptor] = useState('');
     const [motivoArchivo, setMotivoArchivo] = useState('');
     const [archivo, setArchivo] = useState(null);
     const [txtArchivo, setTxtArchivo] = useState('');
-    const [modalTexto, setModalTexto ] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [modalTexto, setModalTexto] = useState(false)
+    const [mensaje, setMensaje] = useState('')
     const fileInputRef = useRef(null);
 
     const emisor = userCarrera;
@@ -43,16 +44,38 @@ const RegistroDoc = () => {
         setModalTexto(false)
     }
 
+    const isAlpha = (str) => /^[A-Za-z]+$/.test(str);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
 
+        if (!isAlpha(nombre)) {
+            setMensaje('El nombre debe contener solo letras');
+            setIsLoading(false);
+            return;
+        }
+
+        if (!isAlpha(apellido)) {
+            setMensaje('El apellido debe contener solo letras');
+            setIsLoading(false);
+            return;
+        }
+
+        if (isNaN(dni)) {
+            setMensaje('El DNI debe ser solo numérico')
+            setIsLoading(false)
+            return
+        }
         if (!receptor) {
-            alert('Por favor, selecciona un receptor y un motivo de archivo.');
+            setMensaje('El receptor no puede estar vacío')
+            setIsLoading(false)
             return;
         }
 
         if (!archivo) {
-            alert('Por favor, selecciona un archivo.');
+            setMensaje('El archivo no puede estar vacío')
+            setIsLoading(false)
             return;
         }
 
@@ -70,6 +93,7 @@ const RegistroDoc = () => {
             await axios.post('https://backenddocument-production-128c.up.railway.app/api/registrar', formData);
             console.log('Documento enviado');
             setShowSuccessModal(true);
+            setMensaje('')
             setTimeout(() => {
                 setShowSuccessModal(false);
                 setNombre('');
@@ -86,6 +110,9 @@ const RegistroDoc = () => {
                 setErrorModal(false)
             }, 2000)
             console.error('Error al enviar el documento:', error);
+        }
+        finally {
+            setIsLoading(false)
         }
     };
 
@@ -107,23 +134,28 @@ const RegistroDoc = () => {
         } else {
             setTxtArchivo('');
         }
+
     };
 
     const handleSelectFile = () => {
         fileInputRef.current.click();
     };
 
-    const txtCute = txtArchivo.slice(0, 100);
+    const txtCute = txtArchivo.slice(0, 55);
 
+    const recargar = () => {
+        window.location.reload();
+    }
     return (
         <div className="registro">
             <Navegador />
             <main className='subRegis'>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className={`form-no ${isLoading ? 'form-si' : ''}`}>
                     <Link to='/panel'>
-                        <IoArrowBackSharp className='volverIco' />
+                        <IoArrowBackSharp className='volverIco' title='Volver' />
                     </Link>
+                    <AiOutlineReload className='icon_reload' onClick={recargar} title='Recargar' />
                     <h3>FORMULARIO DE REGISTRO DE DOCUMENTO</h3>
                     <div>
                         <label>Nombre:</label>
@@ -140,6 +172,7 @@ const RegistroDoc = () => {
                     <div>
                         <label>Enviar a:</label>
                         <select value={receptor} onChange={(e) => setReceptor(e.target.value)}>
+                            <option value="">-----------------------------</option>
                             <option value='Tesoreria'>Tesorería</option>
                             <option value='Dirección'>Dirección</option>
                             <option value='Desarrollo de Sistemas de Información'>Desarrollo de Sistemas de Información</option>
@@ -159,22 +192,22 @@ const RegistroDoc = () => {
                         <label>Motivo de Documento</label>
                         <input type='text' value={motivoArchivo} onChange={(e) => setMotivoArchivo(e.target.value)} required />
                     </div>
-                    <div className='div_selec' onClick={handleSelectFile}>
-                        <p className="selec_archivo" > <FaFileSignature className='ico_subir' /> Selecciona Archivo</p>
-                        <input type="file" className="file" onChange={handleFileChange} style={{display: 'none'}} ref={fileInputRef} />
-                    </div>
-                    <div className="vistaPrevia">
-                        {archivo && (
-                            <p style={{ whiteSpace: 'pre-wrap' }}>{txtCute}....<span onClick={abrirModalText}> Ver más</span></p>
-                        )}
-                    </div>
-                    <div className="scann">
-                        <Link to="/scan/docuement" className="div">
-                            <label>Escanea el Documento</label>
-                            <MdAddAPhoto className="linkIco" />
-                        </Link>
-                    </div>
-                    <button type="submit"><BsFillSendFill /> ENVIAR</button>
+                    {!archivo && (
+                        <div className='div_selec' onClick={handleSelectFile}>
+                            <p className="selec_archivo" > <FaFileSignature className='ico_subir' /> Selecciona Archivo</p>
+                            <input type="file" className="file" onChange={handleFileChange} style={{ display: 'none' }} ref={fileInputRef} />
+                        </div>
+                    )}
+                    {archivo && (
+                        <div>
+                            <p style={{color: 'white'}}>Datos Previos</p>
+                            <div className="vistaPrevia">
+                                <p style={{ whiteSpace: 'pre-wrap' }}>{txtCute}....<span onClick={abrirModalText}> Ver más</span></p>
+                            </div>
+                        </div>
+                    )}
+                    <p style={{ color: 'orangered', textAlign: 'center' }}> {mensaje} </p>
+                    <button type="submit"><BsFillSendFill />{isLoading ? 'Enviando...' : 'ENVIAR'}</button>
                 </form>
             </main>
             <Link to="/extrae">Extraer</Link>
@@ -197,10 +230,19 @@ const RegistroDoc = () => {
                     </div>
                 </div>
             )}
+            {isLoading && (
+                <div className="loading-modal2">
+                    <div className="loading-modal-content2">
+                        <div className="loader"></div>
+                        <p>Registrando...</p>
+                    </div>
+                </div>
+            )}
             {modalTexto && (
                 <div className="modal-text" onClick={cerrrarModaltext}>
                     <div className="modal-text-content" onClick={(e) => e.stopPropagation()}>
-                        <p>{txtArchivo} </p>
+                        <p style={{ whiteSpace: 'pre-wrap', background: 'white', textAlign: 'justify' }}>{txtArchivo} </p>
+                        <IoMdClose className='icon_text_cerrar' onClick={cerrrarModaltext} />
                     </div>
                 </div>
             )}

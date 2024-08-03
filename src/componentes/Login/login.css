@@ -154,3 +154,65 @@ h1 {
         transform: rotate(360deg);
     }
 }
+.btn-ver{
+    background-color: rgb(55, 174, 148);
+    border: none;
+    padding: 7px 13px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 7px;
+    font-family: 'poppins';
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.btn-ver .ico_movi{
+    font-size: 30px;
+    animation: mover 1s linear infinite;
+}
+@keyframes mover{
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(20deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+.modal_video{
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; 
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+.modal_video .video_content{
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: rgb(55, 174, 148) 0 0 10px;
+}
+.modal_video .ico_cerrar{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: white;
+    padding: 5px;
+    font-size: 33px;
+    box-shadow: 0 0 1px white;
+    border-radius: 4px;
+}
+.modal_video .ico_cerrar:hover{
+    box-shadow: 0 0 7px;
+}

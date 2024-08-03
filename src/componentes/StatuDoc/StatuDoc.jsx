@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './stado.css';
+import { IoArrowBackSharp } from "react-icons/io5";
+
 
 const EstadoDocumento = () => {
     const [allDocuments, setAllDocuments] = useState([]);
@@ -12,8 +14,7 @@ const EstadoDocumento = () => {
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
-                // const response = await axios.get('https://backenddocument-production.up.railway.app/api/documents');
-                const response = await axios.get('http://localhost:5000/api/documents');
+                const response = await axios.get('https://backenddocument-production-128c.up.railway.app/api/documents');
                 setAllDocuments(response.data);
             } catch (error) {
                 console.error('Error al obtener los documentos:', error);
@@ -53,12 +54,17 @@ const EstadoDocumento = () => {
         setSelectedDocument(document);
     };
 
+    const volver = () => {
+        window.location.href = '/'
+    }
+
     return (
         <div className="estado">
             <div className="sub_estado">
                 <div className="buscar">
                     <h2>Consultar Estado de Documento</h2>
                     <div>
+                        <IoArrowBackSharp className='ico_volver' onClick={volver}/>
                         <input
                             type="text"
                             placeholder='Buscar Documento por DNI'

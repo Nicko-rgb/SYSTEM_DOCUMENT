@@ -6,6 +6,6 @@
     box-sizing: border-box;
   }
   body{
-    /* position: fixed; */
+    position: fixed;
     width: 100%;
   }
