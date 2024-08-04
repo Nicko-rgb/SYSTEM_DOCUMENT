@@ -1,5 +1,5 @@
 import './registrodoc.css';
-import { useState, useRef, useTransition } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaRegCircleCheck } from "react-icons/fa6";
@@ -30,6 +30,7 @@ const RegistroDoc = () => {
     const [modalTexto, setModalTexto] = useState(false)
     const [mensaje, setMensaje] = useState('')
     const fileInputRef = useRef(null);
+    const [admins, setAdmins] = useState([]);
 
     const emisor = userCarrera;
 
@@ -146,6 +147,26 @@ const RegistroDoc = () => {
     const recargar = () => {
         window.location.reload();
     }
+
+    // Función para obtener los datos de la colección "admins"
+    const fetchAdmins = async () => {
+        try {
+            const response = await fetch('https://backenddocument-production-128c.up.railway.app/api/admins');
+            const data = await response.json();
+            if (response.ok) {
+                setAdmins(data); // Asumiendo que el servidor devuelve un array de administradores
+            } else {
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error('Error al obtener los administradores:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchAdmins(); // Llamar a la función al montar el componente
+    }, []);
+
     return (
         <div className="registro">
             <Navegador />
@@ -173,19 +194,11 @@ const RegistroDoc = () => {
                         <label>Enviar a:</label>
                         <select value={receptor} onChange={(e) => setReceptor(e.target.value)}>
                             <option value="">-----------------------------</option>
-                            <option value='Tesoreria'>Tesorería</option>
-                            <option value='Dirección'>Dirección</option>
-                            <option value='Desarrollo de Sistemas de Información'>Desarrollo de Sistemas de Información</option>
-                            <option value="Contabilidad">Contalidad</option>
-                            <option value="Administración de Empresas">Administración de Empresas</option>
-                            <option value="Asistente Administrativa">Asistente Administrativa</option>
-                            <option value="Mecánica Automotriz">Mecánica Automotriz</option>
-                            <option value="Manejo Forestal">Manejo Forestal</option>
-                            <option value="Enfermeria Técnica">Enfermeria Técnica</option>
-                            <option value="Electricidad Industrial">Electricidad Industrial</option>
-                            <option value="Construcción Civil">Construcción Civil</option>
-                            <option value="Administración de Operaciones Turísticas">Administración de Operaciones Turísticas</option>
-                            <option value="Producción Agropecuaria">Producción Agropecuaria</option>
+                            {admins.map((admin) => (
+                                <option key={admin._id} value={admin.carrera}>
+                                    {admin.carrera}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div>
@@ -200,7 +213,7 @@ const RegistroDoc = () => {
                     )}
                     {archivo && (
                         <div>
-                            <p style={{color: 'white'}}>Datos Previos</p>
+                            <p style={{ color: 'white' }}>Datos Previos</p>
                             <div className="vistaPrevia">
                                 <p style={{ whiteSpace: 'pre-wrap' }}>{txtCute}....<span onClick={abrirModalText}> Ver más</span></p>
                             </div>

@@ -1,0 +1,69 @@
+.reg_admin{
+    position: relative;
+    height: 100vh;
+    background-image: url('https://www.prasaga.com/wp-content/uploads/2022/11/PoW-Images_0002_PoW3-2400x1260.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+    padding-top: 100px;
+}
+.reg_admin main{
+    position: relative;
+    margin-top: 8%;
+}
+.reg_admin main form{
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(15px);
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgb(55, 174, 148);
+    gap: 14px;
+    padding: 15px;
+    transition: .3s ease;
+}
+.reg_admin main form:hover{
+    transition: .3s ease;
+    box-shadow: 0 0 8px rgb(55, 174, 148);
+}
+.reg_admin form h2{
+    color: white;
+    text-align: center;
+}
+.reg_admin form input{
+    padding: 5px;
+    font-size: 15px;
+    outline: none;
+}
+.reg_admin form button{
+    margin: auto;
+    padding: 7px 35px;
+    background-color: rgb(55, 174, 148);
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 0 4px green;
+    color: white;
+    font-size: 16px;
+    font-family: 'poppins';
+    cursor: pointer;
+    transition: .3s ease;
+}
+.reg_admin form button:hover{
+    box-shadow: 0 0 7px rgb(55, 174, 148);
+    transition: .3s ease;
+}
+.reg_admin .volverIco{
+    z-index: 2;
+    color: white;
+    margin-top: -30px;
+    margin-left: -10px;
+    padding: 5px;
+    font-size: 35px;
+}
+@media (max-height: 660px) {
+    .reg_admin main{
+        margin-top: 0;
+    }
+}

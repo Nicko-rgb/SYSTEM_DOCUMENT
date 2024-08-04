@@ -9,6 +9,7 @@
 body{
   position: fixed;
   width: 100%;
+  background: rgb(41, 40, 40);
 }
 .App {
   height: 100vh;

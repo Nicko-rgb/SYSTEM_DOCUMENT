@@ -2,7 +2,7 @@
 
 .login {
     display: flex;
-    justify-content: center;
+    position: relative;
     align-items: center;
     flex-direction: column;
     height: 100vh;
@@ -10,6 +10,26 @@
     background-image: url('https://www.prasaga.com/wp-content/uploads/2022/11/PoW-Images_0002_PoW3-2400x1260.jpg');
     background-size: cover;
     background-position: center;
+    padding: 20px;
+    overflow-y: auto;
+    padding-top: 100px;
+}
+.img {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 7px;
+    width: 85px;
+}
+.img img{
+    width: 100%;
+}
+.img p{
+    color: white;
+    font-family: 'poppins';
+    font-size: 13px;
+    text-align: center;
+    margin-top: -10px;
 }
 
 .login-container {
@@ -22,6 +42,7 @@
     backdrop-filter: blur(20px);
     box-shadow: 0 0 3px rgb(51, 143, 123);
     transition: 0.3s ease;
+    margin-top: 6%;
 }
 .login-container:hover{
     box-shadow: 0 0 15px rgb(51, 143, 123)
@@ -64,6 +85,17 @@ h1 {
     border-color: rgb(134, 24, 77);
     outline: none;
 }
+.login form a{
+    color: white;
+    font-family: 'poppins';
+    text-decoration: none;
+    transition: .3s ease;
+}
+.login form a:hover{
+    text-decoration: underline;
+    transition: .3s ease;
+    font-weight: bold;
+}
 
 .submit-button {
     width: 100%;
@@ -88,6 +120,12 @@ h1 {
     background-color: rgb(55, 174, 148);
     border-radius: 8px;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 370px;
+    width: 100%;
+    cursor: pointer;
 }
 
 .document-status a {
@@ -100,10 +138,6 @@ h1 {
 }
 .icon1{
     font-size: 22px;
-}
-
-.reset a:hover, .document-status a:hover {
-    text-decoration: underline;
 }
 
 
@@ -156,9 +190,30 @@ h1 {
     background-color: rgb(55, 174, 148);
     border: none;
     padding: 7px 13px;
-    position: absolute;
+    border-radius: 7px;
+    font-family: 'poppins';
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    max-width: 370px;
+    margin-top: 15px;
+    width: 100%;
+    cursor: pointer;
+}
+.btn-ver .ico_movi{
+    font-size: 30px;
+    animation: mover 1s linear infinite;
+}
+.btn-admin{
+    background-color: rgb(55, 174, 148);
+    cursor: pointer;
+    border: none;
+    padding: 7px 13px;
+    position: fixed;
     right: 20px;
-    bottom: 20px;
+    top: 35px;
     border-radius: 7px;
     font-family: 'poppins';
     color: white;
@@ -166,9 +221,24 @@ h1 {
     align-items: center;
     gap: 5px;
 }
-.btn-ver .ico_movi{
-    font-size: 30px;
-    animation: mover 1s linear infinite;
+.btn-admin p{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.btn-admin .icon{
+    position: initial;
+}
+.login button{
+    border: none;
+    transition: .3s ease;
+    max-width: 300px;
+}
+.login button:hover{
+    transition: .3s ease;
+    transform: scale(1.01);
+    box-shadow: 0 0 5px rgb(55, 174, 148);
 }
 @keyframes mover{
     0% {
@@ -214,8 +284,79 @@ h1 {
 .modal_video .ico_cerrar:hover{
     box-shadow: 0 0 7px;
 }
-@media (max-width: 700px){
+.modal_login{
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; 
+    background-color: rgba(0, 0, 0, 0.874);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+.modal_login form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    backdrop-filter: blur(15px);
+    padding: 5px 15px;
+    box-shadow: 0 0 5px rgb(55, 174, 148);
+    border-radius: 6px;
+    max-width: 350px;
+    width: 100%;
+    margin-top: 17%;
+}.modal_login form input{
+    margin-top: -15px;
+    padding: 6px;
+    font-size: 15px;
+    font-family: 'poppins';
+    border-radius: 6px;
+    outline: none;
+    border: none;
+}
+.modal_login h3{
+    color: white;
+    text-align: center;
+}
+.modal_login form p{
+    color: white;
+    text-shadow: 0 0 2px red,
+                0 0 2px red,
+                0 0 2px red;
+    text-align: center;
+}
+.modal_login form button{
+    margin-top: 5px;
+    background: rgb(55, 174, 148);
+    border: none;
+    padding: 6px 20px;
+    margin: auto;
+    color: white;
+    box-shadow: 0 0 3px green;
+    border-radius: 6px;
+    font-size: 18px;
+    font-family: 'poppins';
+    cursor: pointer;
+}
+.modal_login .closee{
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    border: none;
+    background: rgb(55, 174, 148);
+    color: red;
+    padding: 5px 15px;
+    font-family: 'poppins';
+    border-radius: 6px;
+    box-shadow: 0 0 3px green;
+}
+
+@media (max-height: 660px){
     .login .login-container{
-        /* max-width: 450px; */
+        margin-top: 0%;
     }
 }
