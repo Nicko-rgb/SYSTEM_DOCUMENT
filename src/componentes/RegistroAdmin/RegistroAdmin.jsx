@@ -40,7 +40,7 @@ const RegistroAdmin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setCarga(true); // Iniciar carga
-        setMsg('')
+        setMsg('');
 
         // Verificar si el correo electrónico ya está registrado
         const emailCheckResponse = await checkEmail(email);

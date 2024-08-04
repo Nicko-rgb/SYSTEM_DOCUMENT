@@ -7,6 +7,7 @@ import Panel from './componentes/Panel/Panel';
 import StatuDoc from './componentes/StatuDoc/StatuDoc';
 import RegistroAdmin from './componentes/RegistroAdmin/RegistroAdmin';
 import ResetPassword from './componentes/Resetpass/ResetPassword';
+import NewPassword from './componentes/Resetpass/NewPassword';
 import { AuthProvider } from './componentes/Complementos/Autenticacion';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/document-status" element={<StatuDoc />} />
                     <Route path='/register/admin' element={<RegistroAdmin />} />
                     <Route path='/reset-password' element={<ResetPassword />} />
+                    <Route path='/new-password/:token' element={<NewPassword />} />
                 </Routes>
             </BrowserRouter>
         </AuthProvider>

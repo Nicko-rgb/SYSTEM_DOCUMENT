@@ -1,4 +1,4 @@
-import './reset.css'
+import './reset.css';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -16,12 +16,12 @@ const ResetPassword = () => {
             setError('Por favor, ingresa tu correo electrónico.');
             return;
         }
-        setMessage('Enviando ...')
+        setMessage('Enviando ...');
         try {
             const response = await axios.post('https://backenddocument-production-128c.up.railway.app/api/reset-password', { email });
             setMessage('Enlace enviado, revise su Email ✓✓');
         } catch (error) {
-            setMessage('')
+            setMessage('');
             setError('Error al enviar el enlace. Inténtalo de nuevo.');
         }
     };
