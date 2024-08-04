@@ -9,12 +9,12 @@
     justify-content: center;
     align-items: center;
     overflow-y: auto;
-    z-index: 1000; /* Asegúrate de que el modal esté por encima de otros elementos */
+    z-index: 9999; /* Asegúrate de que el modal esté por encima de otros elementos */
 }
 
 .modal-content {
     position: relative;
-    max-width: 90%;
+    max-width: 1000px;
     max-height: 90%;
 }
 

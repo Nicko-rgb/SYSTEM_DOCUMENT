@@ -13,11 +13,11 @@
 }
 
 .login-container {
-    /* background-color: white; */
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    max-width: 370px;
+    width: 100%;
     text-align: center;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 3px rgb(51, 143, 123);
@@ -68,6 +68,8 @@ h1 {
 .submit-button {
     width: 100%;
     padding: 10px;
+    margin-top: 20px;
+    font-family: 'poppins';
     background-color: rgb(55, 174, 148);
     color: white;
     border: none;
@@ -103,10 +105,6 @@ h1 {
 .reset a:hover, .document-status a:hover {
     text-decoration: underline;
 }
-
-
-
-
 
 
 .modal_sesion {
@@ -215,4 +213,9 @@ h1 {
 }
 .modal_video .ico_cerrar:hover{
     box-shadow: 0 0 7px;
+}
+@media (max-width: 700px){
+    .login .login-container{
+        /* max-width: 450px; */
+    }
 }

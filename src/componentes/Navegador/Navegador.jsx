@@ -15,7 +15,7 @@ export const Navegador = () => {
                 <img src={logoSuiza} alt="" />
             </div>
             <div className='medio'>
-                <h2>Panel de {userCarrera} </h2>
+                <h2>{userCarrera} </h2>
                 <p>Sistema de Envios de Documentos</p>
             </div>
             <Link to='/' className="boton" onClick={handleLogout}><IoLogOutOutline className="icono" />Cerrrar Sesion</Link>

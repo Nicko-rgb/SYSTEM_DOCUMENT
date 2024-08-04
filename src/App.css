@@ -6,6 +6,6 @@
     box-sizing: border-box;
   }
   body{
-    position: fixed;
+    background-color: rgb(41, 43, 43);
     width: 100%;
   }

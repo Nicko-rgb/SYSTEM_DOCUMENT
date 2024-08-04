@@ -22,7 +22,8 @@
 }
 
 .navegador p {
-    font-size: 17px;
+    font-size: 16px;
+    color: rgb(232, 232, 232);
 }
 .navegador .boton{
     cursor: pointer;

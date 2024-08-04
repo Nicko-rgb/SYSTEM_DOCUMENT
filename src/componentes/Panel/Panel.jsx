@@ -6,16 +6,21 @@ import { BsFillSendPlusFill } from "react-icons/bs";
 import EstadoSesion from '../Login/Sesion';
 import Navegador from '../Navegador/Navegador';
 import ImageModal from './ModalImg';
+import FechaHora from '../Complementos/Fecha'
+import PrintFile from '../Complementos/PrintFile';
+import ImageReconstructor from '../Complementos/Reconstruir'
 
 export const Panel = () => {
     const { userCarrera } = EstadoSesion();
     const [allDocuments, setAllDocuments] = useState([]);
     const [selectedDocument, setSelectedDocument] = useState(null);
     const [searchDni, setSearchDni] = useState('');
-
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [openDoc, setOpenDoc] = useState(false);
+    const [mensaje, setMensaje] = useState('');
     const [selectedImage, setSelectedImage] = useState('');
 
+    //obtener todos los documentos
     useEffect(() => {
         const fetchDocuments = async () => {
             try {
@@ -31,7 +36,10 @@ export const Panel = () => {
     const receivedDocuments = allDocuments.filter(doc => doc.receptor === userCarrera && doc.dni.includes(searchDni));
     const sentDocuments = allDocuments.filter(doc => doc.emisor === userCarrera);
 
+    //actualizar el estado de documento y seleccion de documento
     const handleDocumentClick = async (document) => {
+        setOpenDoc(true)
+        setMensaje('Cargando Documento...')
         try {
             // Actualizar el documento en el estado local
             setAllDocuments(prevDocuments =>
@@ -44,6 +52,8 @@ export const Panel = () => {
 
             // Establecer el documento seleccionado
             setSelectedDocument(document);
+            setOpenDoc(false)
+            setMensaje('')
         } catch (error) {
             console.error('Error al marcar el documento como leído:', error);
         }
@@ -69,7 +79,7 @@ export const Panel = () => {
             <main className="main">
                 <div className="recibidos mensajes">
                     <div className="cabeza">
-                        <h2>Documentos Nuevos</h2>
+                        <p>Documentos Nuevos</p>
                         <input className='buscar' type="text" placeholder='Buscar Documento por DNI' value={searchDni} onChange={handleSearchDni} />
                     </div>
                     <div className='box'>
@@ -78,86 +88,81 @@ export const Panel = () => {
                                 <div className={`punto ${document.leido ? 'leido' : ''}`}></div>
                                 <h3>De: {document.emisor}</h3>
                                 <p><span>Estd:</span> {document.nombre} {document.apellido} </p>
-                                {/* Mostrar la fecha de creación */}
-                                <div className="fecha_hora">
-                                    <p className='fecha'>{new Date(document.createdAt).toLocaleDateString('es-ES', {
-                                        day: 'numeric',
-                                        month: 'long',
-                                        year: 'numeric'
-                                    })}</p>
-                                    {/* Mostrar la hora de creación */}
-                                    <p className='hora'>{new Date(document.createdAt).toLocaleTimeString('es-ES', {
-                                        hour: '2-digit',
-                                        minute: '2-digit',
-                                        hour12: false // Cambiar a true si deseas el formato de 12 horas
-                                    })}</p>
-                                </div>
+                                <FechaHora createdAt={document.createdAt} />
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className="content">
-                    {selectedDocument && (
-                        <div className='subContent'>
-                            <h3>DETALLES DEL DOCUMENTO</h3>
-                            <div className="datostxt">
-                                <p><span>Nombre:</span> {selectedDocument.nombre}</p>
-                                <p><span>Apellido:</span> {selectedDocument.apellido}</p>
-                                <p><span>DNI:</span> {selectedDocument.dni}</p>
-                                <p><span>Receptor:</span> {selectedDocument.receptor}</p>
-                                <p><span>Emisor:</span> {selectedDocument.emisor}</p>
-                                <p><span>Motivo de Archivo:</span> {selectedDocument.motivoArchivo}</p>
-                                {/* Mostrar la fecha de creación en los detalles */}
-                                <p><span>Fecha de </span> {new Date(selectedDocument.createdAt.$date).toLocaleString()}</p>
-                            </div>
-                            <div className="datosAdjunto">
-                                {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
-                                    <img
-                                        src={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`}
-                                        alt="Archivo adjunto"
-                                        onClick={() => openModal(`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`)}
-                                        style={{ cursor: 'pointer' }} // Cambia el cursor al pasar sobre la imagen
-                                    />
-                                ) : (
-                                    <a href={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
-                                        Ver archivo adjunto
-                                    </a>
-                                )}
-                                {selectedDocument.txtArchivo && (
-                                    <div className="boxTxt">
-                                        <h3>TEXTO DEL ARCHIVO</h3>
-                                        <div>
-                                            <p>{selectedDocument.txtArchivo} </p>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
+                    {openDoc ? (
+                        <div className="cargando_doc">
+                            <div className="loader"></div>
+                            <p>{mensaje}</p>
                         </div>
+                    ) : (
+                        <>
+                            {selectedDocument && (
+                                <div className='subContent'>
+                                    <h3>DETALLES DEL DOCUMENTO</h3>
+                                    <div className="datostxt">
+                                        <p><span>Nombre:</span> {selectedDocument.nombre}</p>
+                                        <p><span>Apellido:</span> {selectedDocument.apellido}</p>
+                                        <p><span>DNI:</span> {selectedDocument.dni}</p>
+                                        <p><span>Receptor:</span> {selectedDocument.receptor}</p>
+                                        <p><span>Emisor:</span> {selectedDocument.emisor}</p>
+                                        <p><span>Motivo de Archivo:</span> {selectedDocument.motivoArchivo}</p>
+                                        <p className='fecha'> <span>Fecha de Envío:</span> {new Date(selectedDocument.createdAt).toLocaleDateString('es-ES', {
+                                            day: 'numeric',
+                                            month: 'long',
+                                            year: 'numeric',
+                                            hour: '2-digit',
+                                            minute: '2-digit',
+                                            hour12: false // Cambiar a true si deseas el formato de 12 horas
+                                        })}</p>
+                                    </div>
+                                    <div className="datosAdjunto">
+                                        {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
+                                            <>
+                                                <div className="box-img">
+                                                    <img
+                                                        src={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`}
+                                                        alt="Archivo adjunto"
+                                                        onClick={() => openModal(`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`)}
+                                                        style={{ cursor: 'pointer' }} // Cambia el cursor al pasar sobre la imagen
+                                                    />
+                                                    <div className="button-rec">
+                                                        <PrintFile imageUrl={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`} />
+                                                        <ImageReconstructor imageUrl={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`} />
+                                                    </div>
+                                                </div>
+                                                <div className="boxTxt">
+                                                    <h3>TEXTO DEL ARCHIVO</h3>
+                                                    <div>
+                                                        <p>{selectedDocument.txtArchivo}</p>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <a href={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
+                                                Ver archivo adjunto
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
                 <div className="enviados mensajes">
                     <div className="cabeza">
-                        <h2>Documentos Enviados</h2>
+                        <p>Documentos Enviados</p>
                     </div>
                     <div className="box">
                         {[...sentDocuments].reverse().map((document) => (
                             <div key={document._id} className="mssg">
                                 <h3>Enviado a: {document.receptor}</h3>
                                 <p>Motivo: {document.motivoArchivo}</p>
-                                {/* Mostrar la fecha de creación */}
-                                <div className="fecha_hora">
-                                    <p className='fecha'>{new Date(document.createdAt).toLocaleDateString('es-ES', {
-                                        day: 'numeric',
-                                        month: 'long',
-                                        year: 'numeric'
-                                    })}</p>
-                                    {/* Mostrar la hora de creación */}
-                                    <p className='hora'>{new Date(document.createdAt).toLocaleTimeString('es-ES', {
-                                        hour: '2-digit',
-                                        minute: '2-digit',
-                                        hour12: false // Cambiar a true si deseas el formato de 12 horas
-                                    })}</p>
-                                </div>
+                                <FechaHora createdAt={document.createdAt} />
                             </div>
                         ))}
                     </div>
@@ -165,11 +170,7 @@ export const Panel = () => {
                 <Link to="/registro" className='button'><BsFillSendPlusFill className='ico_panel' /> Enviar Documento </Link>
             </main>
             {isModalOpen && (
-                <ImageModal
-                    isOpen={isModalOpen}
-                    imageSrc={selectedImage}
-                    onClose={closeModal}
-                />
+                <ImageModal isOpen={isModalOpen} imageSrc={selectedImage} onClose={closeModal} />
             )}
         </div>
     );
