@@ -47,7 +47,7 @@ const PrintFile = ({ imageUrl }) => {
   };
 
   return (
-    <button onClick={handlePrintImage}><FaPrint className='ico' /> Imprimir Imagen</button>
+    <button onClick={handlePrintImage}><FaPrint className='ico' /> Imprimir Archivo</button>
   );
 };
 

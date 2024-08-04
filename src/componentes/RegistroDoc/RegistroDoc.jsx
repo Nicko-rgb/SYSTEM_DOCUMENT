@@ -153,9 +153,9 @@ const RegistroDoc = () => {
 
                 <form onSubmit={handleSubmit} className={`form-no ${isLoading ? 'form-si' : ''}`}>
                     <Link to='/panel'>
-                        <IoArrowBackSharp className='volverIco' title='Volver' />
+                        <IoArrowBackSharp className='volverIco  aaa' title='Volver' />
                     </Link>
-                    <AiOutlineReload className='icon_reload' onClick={recargar} title='Recargar' />
+                    <AiOutlineReload className='icon_reload aa' onClick={recargar} title='Recargar' />
                     <h3>FORMULARIO DE REGISTRO DE DOCUMENTO</h3>
                     <div>
                         <label>Nombre:</label>
@@ -210,7 +210,6 @@ const RegistroDoc = () => {
                     <button type="submit"><BsFillSendFill />{isLoading ? 'Enviando...' : 'ENVIAR'}</button>
                 </form>
             </main>
-            <Link to="/extrae">Extraer</Link>
             <LoadingModal isOpen={loading} onClose={() => setLoading(false)} />
             {showSuccessModal && (
                 <div className="success-modal">

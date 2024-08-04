@@ -21,7 +21,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    padding: 80px;
+    padding: 80px 0;
 }
 .registro form {
     position: relative;
@@ -35,7 +35,6 @@
     backdrop-filter: blur(20px);
 }
 .registro form {
-    /* background-color: white; */
     padding: 30px;
     border-radius: 8px;
     backdrop-filter: blur(20px);
@@ -335,4 +334,14 @@ form .file {
 .loading-modal2 p{
     color: black;
     font-family: 'poppins';
+}
+
+@media (max-width: 700px){
+    .registro form{
+        width: 100%;
+    }
+    .registro .aaa{
+        position: absolute;
+        border: red solid;
+    }
 }

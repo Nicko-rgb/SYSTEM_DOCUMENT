@@ -5,13 +5,14 @@
     gap: 5px;
     overflow-y: auto;
     background: rgb(240, 255, 251);
+    height: 100vh;
 }
 
 .panel .button {
     position: fixed;
-    right: 50px;
-    bottom: 40px;
-    padding: 12px;
+    right: 30px;
+    bottom: 30px;
+    padding: 12px 5px;
     background: rgb(55, 174, 148);
     color: white;
     border: none;
@@ -44,8 +45,7 @@
 }
 
 .panel .button:hover {
-    background: rgba(46, 209, 168, 0.869);
-    color: black;
+    background: rgb(17, 172, 136);
     animation-play-state: paused;
 }
 
@@ -56,11 +56,12 @@
     height: auto;
     height: calc(100vh - 100px);
     padding: 5px;
+    overflow-x: hidden;
 }
 
 /*Estylos para mensajes*/
 main .mensajes {
-    width: 250px;
+    width: 230px;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
@@ -139,17 +140,17 @@ main .mensajes .buscar {
 }
 
 .panel main .mensajes .box .mssg:hover {
-    background: rgba(55, 174, 148, 0.103);
+    background: rgb(229, 244, 240);
 }
 
 main .mensajes .box h3 {
-    font-size: 14px;
+    font-size: 13px;
     white-space: nowrap;/* Evita que el texto se envuelva */
     overflow: hidden;/* Oculta cualquier parte del texto que exceda el ancho */
     text-overflow: ellipsis;/* Muestra puntos suspensivos al final del texto visible */
 }
 .panel main .box p {
-    font-size: 14px;
+    font-size: 13px;
     white-space: nowrap;/* Evita que el texto se envuelva */
     overflow: hidden;/* Oculta cualquier parte del texto que exceda el ancho */
     text-overflow: ellipsis;/* Muestra puntos suspensivos al final del texto visible */
@@ -171,7 +172,7 @@ main .mensajes .box h3 {
 
 .panel .mensajes .box span {
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 /*****************************************/
@@ -255,7 +256,7 @@ main .content {
     flex-direction: column;
     gap: 5px;
     font-family: 'poppins';
-    padding-bottom: 10px;
+    margin-top: -10px;
 }
 
 span {
@@ -263,26 +264,55 @@ span {
 }
 
 .content .datostxt span {
-    font-size: .95rem;
+    font-size: 13px;
+}
+.content .datostxt p{
+    font-size: 13px;
 }
 
 .content .datosAdjunto {
     display: flex;
-    justify-content: space-evenly;
     width: 100%;
+    gap: 0px;
+    max-height: 40vh;
+    height: 100%;
+    margin-top: -10px;
+    margin-bottom: 80px;
+}
+.content .datosAdjunto .sub-adjunto{
+    width: 100%;
+    display: flex;
     gap: 10px;
+    justify-content: space-around;
+}
+.panel .sub-adjunto .box-img{
+    border: rgb(203, 203, 203) solid 1px;
+    width: 100%;
     padding: 5px;
 }
-.content .datosAdjunto .box-img{
-    display: flex;
-    flex-direction: column;
+
+.panel .sub-adjunto .boxTxt{
+    border: rgb(203, 203, 203) solid 1px;
+    width: 100%;
+    padding: 5px;
+    overflow-y: auto;
+    position: relative;
 }
-.panel .datosAdjunto .box-img .button-rec{
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+.panel .boxTxt h3{
+    text-align: center;
+    position: sticky;
+    top: 0;
+    background: rgb(55, 174, 148);
 }
-.panel .datosAdjunto .box-img .button-rec button{
+.panel .boxTxt > div {
+    background: white;
+    margin-top: 7px;
+}
+.panel .boxTxt p{
+    font-family: 'poppins';
+    font-size: 14px;
+}
+.panel .datosAdjunto .box-img button{
     color: white;
     border: none;
     padding: 6px;
@@ -291,24 +321,20 @@ span {
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 0 0 3px green;
+    margin: auto;
+    margin-top: 20px;
     display: flex;
-    align-items: center;
     gap: 4px;
+    align-items: center;
 }
-.panel .button-rec .ico{
+.panel .box-img .ico{
     font-size: 16px;
 }
-.content .subContent img {
-    max-width: 400px;
+.panel .sub-adjunto .box-img img{
     width: 100%;
-    max-height: 600px;
-    padding: 10px;
-    border-radius: 10px;
-    background: rgba(159, 169, 159, 0.036);
-    box-shadow: 0 0 2px green;
+    height: 100%;
     object-fit: contain;
 }
-
 .subContent .datosAdjunto a {
     box-shadow: 0 0 3px green;
     border-radius: 10px;
@@ -317,13 +343,14 @@ span {
     display: grid;
     place-items: center;
     text-decoration: none;
-    background: rgb(17, 90, 132);
+    background: rgb(55, 174, 148);
     color: white;
     font-weight: bold;
     font-family: calibri;
     transition: 0.3s ease;
     animation-play-state: running;
     animation: temblor 0.5s ease-in-out 2s infinite;
+    margin: 0 auto;
 }
 
 @keyframes temblor {
@@ -355,79 +382,106 @@ span {
     text-decoration: underline;
     animation-play-state: paused;
 }
-
-.content .subContent .boxTxt {
-    box-shadow: 0 0 2px green;
-    background: rgba(0, 128, 0, 0.036);
-    white-space: pre-wrap;
-    border-radius: 10px;
-    padding: 10px;
-    padding-bottom: 10px;
-    max-width: 500px;
-    width: 100%;
-    min-width: 400px;
-    max-height: 600px;
-    position: relative;
-}
-
-.subContent .boxTxt h3 {
-    text-align: center;
-    font-family: calibri;
-    text-decoration: underline;
-    padding: 10px;
-    height: 43px;
-}
-
-.subContent .boxTxt>div {
-    overflow-y: auto;
-    max-height: 537px;
-}
-
-.subContent .boxTxt p {
-    font-family: 'poppins';
-    font-size: 15px;
-    text-align: justify;
-    background: white;
-    padding: 10px;
-}
-
 /*Estylos de scroll*/
-.boxTxt>div::-webkit-scrollbar {
+.boxTxt::-webkit-scrollbar {
     width: 6px;
     height: 6px;
     cursor: pointer;
 }
 
-.boxTxt>div::-webkit-scrollbar-thumb {
+.boxTxt::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 5px;
 
 }
 
-.boxTxt>div::-webkit-scrollbar-thumb:hover {
+.boxTxt::-webkit-scrollbar-thumb:hover {
     background-color: #555;
 }
 
-@media (max-width: 1200px){
-    .panel .content .datosAdjunto{
-        flex-wrap: wrap;
-        padding: 0;
+.menu-nav{
+    position: absolute;
+    right: 13px;
+    top: 7px;
+    border: black solid 1px;
+    color: rgb(7, 47, 42);
+    padding: 5px;
+    font-size: 35px;
+    display: none;
+    background: white;
+}
+
+@media (max-width: 1100px){
+    .menu-nav {
+        display: block;
+        cursor: pointer;
+        z-index: 2;
+    }
+    .panel .enviados{
+        position: absolute;
+        right: -230px;
+    }
+    .menu-nav:hover ~ .enviados {
+        z-index: 2;
+        right: 0;
+    }
+    .panel .enviados:hover{
+        z-index: 2;
+        right: 0;
+    }
+}
+@media (max-width: 900px){
+    .content .datosAdjunto{
+        max-height: initial;
         margin-bottom: 200px;
     }
-    .panel .datosAdjunto img{
-        object-fit: cover;
-        max-width: 500px;
+    .content .datosAdjunto .sub-adjunto{
+        flex-direction: column;
+    }
+    .content .datosAdjunto .sub-adjunto .box-img{
+        max-height: 400px;
+    }
+    .content .datosAdjunto .sub-adjunto .boxTxt{
+        margin-top: 60px;
+    }
+    .content .datosAdjunto .sub-adjunto .box-img button{
+        z-index: 2;
     }
 }
-@media (max-width: 1000px) {
-    .panel .enviados{
-        transition: .3s ease;
-        display: none;
-    }
+
+.menu-recividos{
+    position: absolute;
+    z-index: 2;
+    left: 13px;
+    top: 7px;
+    padding: 5px;
+    font-size: 35px;
+    border: black solid 1px;
+    color: rgb(7, 47, 42);
+    display: none;
+    cursor: pointer;
+    background: white;
 }
-@media (max-width: 750px) {
-    .panel main .mensajes{
-        width: 220px;
-        transition: .3s ease;
+@media (max-width: 700px){
+    .menu-recividos{
+        display: block;
+    }
+    .panel .recibidos{
+        position: absolute;
+        left: -230px;
+        z-index: 2;
+    }
+    .menu-recividos:hover ~ .recibidos{
+        left: 0;
+    }
+    .panel .recibidos:hover{
+        left: 0;
+        z-index: 2;
+    }
+    .panel .mensajes{
+        height: 98%;
+        background: white;
+        border: 1px solid rgb(55, 174, 148);
+        padding: 0;
     }
 }

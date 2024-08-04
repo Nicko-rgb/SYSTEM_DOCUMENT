@@ -8,7 +8,7 @@ import Navegador from '../Navegador/Navegador';
 import ImageModal from './ModalImg';
 import FechaHora from '../Complementos/Fecha'
 import PrintFile from '../Complementos/PrintFile';
-import ImageReconstructor from '../Complementos/Reconstruir'
+import { FaBars } from "react-icons/fa";
 
 export const Panel = () => {
     const { userCarrera } = EstadoSesion();
@@ -77,6 +77,8 @@ export const Panel = () => {
         <div className="panel">
             <Navegador />
             <main className="main">
+                <FaBars className='menu-nav'/>
+                <FaBars className='menu-recividos'/>
                 <div className="recibidos mensajes">
                     <div className="cabeza">
                         <p>Documentos Nuevos</p>
@@ -122,7 +124,7 @@ export const Panel = () => {
                                     </div>
                                     <div className="datosAdjunto">
                                         {selectedDocument.archivo.filename.endsWith('.png') || selectedDocument.archivo.filename.endsWith('.jpg') || selectedDocument.archivo.filename.endsWith('.jpeg') ? (
-                                            <>
+                                            <div className='sub-adjunto'>
                                                 <div className="box-img">
                                                     <img
                                                         src={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`}
@@ -130,18 +132,15 @@ export const Panel = () => {
                                                         onClick={() => openModal(`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`)}
                                                         style={{ cursor: 'pointer' }} // Cambia el cursor al pasar sobre la imagen
                                                     />
-                                                    <div className="button-rec">
-                                                        <PrintFile imageUrl={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`} />
-                                                        <ImageReconstructor imageUrl={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`} />
-                                                    </div>
+                                                    <PrintFile imageUrl={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`} />
                                                 </div>
                                                 <div className="boxTxt">
-                                                    <h3>TEXTO DEL ARCHIVO</h3>
+                                                    <h3>Datos Extraidos</h3>
                                                     <div>
-                                                        <p>{selectedDocument.txtArchivo}</p>
+                                                        <p style={{whiteSpace: 'pre-wrap'}}>{selectedDocument.txtArchivo}</p>
                                                     </div>
                                                 </div>
-                                            </>
+                                            </div>
                                         ) : (
                                             <a href={`https://backenddocument-production-128c.up.railway.app/${selectedDocument.archivo.path}`} target="_blank" rel="noopener noreferrer">
                                                 Ver archivo adjunto
@@ -167,7 +166,7 @@ export const Panel = () => {
                         ))}
                     </div>
                 </div>
-                <Link to="/registro" className='button'><BsFillSendPlusFill className='ico_panel' /> Enviar Documento </Link>
+                <Link to="/registro" className='button'><BsFillSendPlusFill className='ico_panel' /> Enviar Nuevo Documento </Link>
             </main>
             {isModalOpen && (
                 <ImageModal isOpen={isModalOpen} imageSrc={selectedImage} onClose={closeModal} />
