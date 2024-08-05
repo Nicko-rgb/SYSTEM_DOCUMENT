@@ -14,6 +14,8 @@
     position: relative;
     margin: auto;
     padding-bottom: 100px;
+    max-width: 380px;
+    width: 100%;
 }
 .reg_admin main form{
     display: flex;
