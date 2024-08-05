@@ -45,7 +45,7 @@ const RegistroDoc = () => {
         setModalTexto(false)
     }
 
-    const isAlpha = (str) => /^[A-Za-z]+$/.test(str);
+    const isAlpha = (str) => /^[A-Za-z\s]+$/.test(str);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
