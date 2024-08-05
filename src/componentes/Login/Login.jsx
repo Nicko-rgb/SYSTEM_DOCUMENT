@@ -151,8 +151,8 @@ const Login = () => {
             {loginAdmin && (
                 <div className="modal_login" onClick={cerrarLoginAdmin}>
                     <form onClick={(e) => e.stopPropagation()} onSubmit={handleAdmin}>
-                        <h3>Ingrese Datos del Super Admiministrador</h3>
-                        <label>Super Administrador</label>
+                        <h3>Ingrese Datos del Admiministrador</h3>
+                        <label>Administrador</label>
                         <input type="text" value={administrador} onChange={(e) => setAdministrador(e.target.value)} required />
                         <label>Clave</label>
                         <input type="password" value={passAdministrador} onChange={(e) => setPassAdministrador(e.target.value)} required />
