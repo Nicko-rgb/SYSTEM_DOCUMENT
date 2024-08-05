@@ -91,21 +91,21 @@ const RegistroAdmin = () => {
                     <IoArrowBackSharp className='volverIco aaa' title='Volver' />
                 </Link>
                 <form onSubmit={handleSubmit}>
-                    <h2>Registrar Nuevo Administrador</h2>
+                    <h2>Registrar Nuevo Usuario</h2>
                     <div>
                         <label>Nombre de Entidad o Carrera</label>
                         <input type="text" value={carrera} onChange={(e) => setCarrera(e.target.value)} required />
                     </div>
                     <div>
-                        <label>Administrador</label>
+                        <label>Usuario</label>
                         <input type="text" value={admin} onChange={(e) => setAdmin(e.target.value)} required />
                     </div>
                     <div>
-                        <label>Correo de Administrador</label>
+                        <label>Correo de Usuario</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
                     <div>
-                        <label>Clave de Administrador</label>
+                        <label>Clave de Usuario</label>
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     </div>
                     {msg && <p style={{ color: 'white', textAlign: 'center' }}>{msg}</p>} {/* Mensaje de error o éxito */}
