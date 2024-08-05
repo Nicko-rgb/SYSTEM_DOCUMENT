@@ -139,7 +139,7 @@ const Login = () => {
                 </div>
             )}
             <button className='btn-ver' onClick={verVideo}><RiMovieLine className='ico_movi' /> Ver Tutorial de Uso</button>
-            <button className='btn-admin' onClick={abrirLoginAdmin}>  <p><RiAdminLine className="icon" />Administrador</p></button>
+            <button className='btn-admin' onClick={abrirLoginAdmin}>  <p><RiAdminLine className="icon" />Super Administrador</p></button>
             {video && (
                 <div className="modal_video" onClick={cerrarVideo}>
                     <div className="video_content" onClick={(e) => e.stopPropagation()}>
@@ -151,7 +151,7 @@ const Login = () => {
             {loginAdmin && (
                 <div className="modal_login" onClick={cerrarLoginAdmin}>
                     <form onClick={(e) => e.stopPropagation()} onSubmit={handleAdmin}>
-                        <h3>Ingrese Datos del Super Admiminstrador</h3>
+                        <h3>Ingrese Datos del Super Admiministrador</h3>
                         <label>Super Administrador</label>
                         <input type="text" value={administrador} onChange={(e) => setAdministrador(e.target.value)} required />
                         <label>Clave</label>
