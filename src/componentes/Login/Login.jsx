@@ -111,7 +111,7 @@ const Login = () => {
                 <h1>Iniciar Sesión</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label className='label'>Administrador</label>
+                        <label className='label'>Usuario</label>
                         <input required type="text" value={admin} onChange={(e) => setAdmin(e.target.value)} className="input-field" />
                         <RiAdminLine className="icon" />
                     </div>
