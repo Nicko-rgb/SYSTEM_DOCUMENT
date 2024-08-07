@@ -86,8 +86,8 @@ const Login = () => {
 
     const handleAdmin = (e) => {
         e.preventDefault()
-        const adminU = 'admin'
-        const passU = 'admin'
+        const adminU = 'dsi-2024'
+        const passU = 'admin2024/7'
 
         if (adminU === administrador && passU === passAdministrador) {
             setIsAuthenticated(true)
