@@ -19,7 +19,7 @@ function App() {
                     <Route path="/registro" element={<RegistroDoc />} />
                     <Route path="/scan/docuement" element={<Scaner />} />
                     <Route path="/panel" element={<Panel />} />
-                    <Route path="/document-status" element={<StatuDoc />} />
+                    <Route path="/estadodoc" element={<StatuDoc />} />
                     <Route path='/register/admin' element={<RegistroAdmin />} />
                     <Route path='/reset-password' element={<ResetPassword />} />
                     <Route path='/new-password/:token' element={<NewPassword />} />

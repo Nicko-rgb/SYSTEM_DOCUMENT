@@ -128,7 +128,7 @@ const Login = () => {
 
             </div>
             <button className="document-status">
-                <a href="/document-status"><GrStatusGood className='icon1' /> ¡Ver estado de documento!</a>
+                <a href="/estadodoc"><GrStatusGood className='icon1' /> ¡Ver estado de documento!</a>
             </button>
             {modalVisible && (
                 <div className="modal_sesion" style={{ color: modalColor }}>
